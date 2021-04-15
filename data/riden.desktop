@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Riden GUI
+Comment=Riden Qt GUI using PyQt
+Exec=env KDE_NO_GLOBAL_MENU=1 ridengui
+Icon=riden.png
+Terminal=false
