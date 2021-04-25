@@ -1,5 +1,6 @@
 from PySide2.QtWidgets import QApplication, QMainWindow, QDialog
-from ridengui.settings import OpenSettings
+from ridengui.settings import OpenSettingsDialog
+from ridengui.serial import OpenSerialDialog
 from ridengui.main_ui import Ui_MainWindow
 from PySide2.QtCore import QSettings
 from threading import Lock, Thread
@@ -14,11 +15,12 @@ class MainWindow(QMainWindow):
         # Setup UI
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.statusBar.showMessage("Loading...", 1000)
+        self.ui.Status_Bar.showMessage("Loading...", 1000)
 
         # Setup menubar actions
-        self.ui.actionQuit.triggered.connect(self.close)
-        self.ui.actionSettings.triggered.connect(lambda: OpenSettings(self.r, self.l))
+        self.ui.Action_Quit.triggered.connect(self.close)
+        self.ui.Action_Settings.triggered.connect(lambda: OpenSettingsDialog(self.r, self.l))
+        self.ui.Action_Serial.triggered.connect(lambda: OpenSerialDialog())
 
         # Setup SpinBoxes and Dials
         self.ui.V_Set_SpinBox.valueChanged.connect(lambda v: self.ui.V_Set_Dial.setValue(v * 100))
@@ -28,11 +30,13 @@ class MainWindow(QMainWindow):
 
         # Setup settings
         settings = QSettings("Riden", "settings")
-        port = settings.value("serial/port", "/dev/ttyUSB0")
+        port = str(settings.value("serial/port", "/dev/ttyUSB0"))
+        baudrate = int(settings.value("serial/baudrate", 115200))
+        address = int(settings.value("serial/address", 1))
 
         try:
             # Setup Riden serial library
-            self.r = Riden(port)
+            self.r = Riden(port, baudrate, address)
             self.l = Lock()
 
             # Setup UI thread
@@ -61,7 +65,8 @@ class MainWindow(QMainWindow):
                     self.ui.OutputS.setText("Enabled" if is_checked else "Disabled")
                     self.r.set_output(is_checked)
         except:
-            self.ui.statusBar.showMessage("Couldn't connect, change port in Edit > Settings")
+            self.ui.Status_Bar.showMessage("Failed to connect, Edit > Serial, Restart required", 0)
+            OpenSerialDialog()
 
     def updateUI(self):
         with self.l:

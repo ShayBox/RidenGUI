@@ -500,7 +500,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
+  <widget class="QMenuBar" name="Menu_Bar">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -509,42 +509,48 @@
      <height>30</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
+   <widget class="QMenu" name="Menu_File">
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionQuit"/>
+    <addaction name="Action_Quit"/>
    </widget>
-   <widget class="QMenu" name="menuAbout">
+   <widget class="QMenu" name="Menu_About">
     <property name="title">
      <string>Edit</string>
     </property>
-    <addaction name="actionSettings"/>
+    <addaction name="Action_Settings"/>
+    <addaction name="Action_Serial"/>
    </widget>
-   <widget class="QMenu" name="menuHelp">
+   <widget class="QMenu" name="Menu_Help">
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionAbout"/>
+    <addaction name="Action_About"/>
    </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuAbout"/>
-   <addaction name="menuHelp"/>
+   <addaction name="Menu_File"/>
+   <addaction name="Menu_About"/>
+   <addaction name="Menu_Help"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionQuit">
+  <widget class="QStatusBar" name="Status_Bar"/>
+  <action name="Action_Quit">
    <property name="text">
     <string>Quit</string>
    </property>
   </action>
-  <action name="actionSettings">
+  <action name="Action_Settings">
    <property name="text">
     <string>Settings</string>
    </property>
   </action>
-  <action name="actionAbout">
+  <action name="Action_About">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="Action_Serial">
+   <property name="text">
+    <string>Serial</string>
    </property>
   </action>
  </widget>
