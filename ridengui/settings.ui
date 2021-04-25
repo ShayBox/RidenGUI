@@ -130,12 +130,12 @@
      </item>
      <item>
       <property name="text">
-       <string>German</string>
+       <string>Deutsch</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>French</string>
+       <string>Français</string>
       </property>
      </item>
     </widget>

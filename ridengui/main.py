@@ -64,6 +64,7 @@ class MainWindow(QMainWindow):
                     is_checked = self.ui.OutputS_Button.isChecked()
                     self.ui.OutputS.setText("Enabled" if is_checked else "Disabled")
                     self.r.set_output(is_checked)
+
         except:
             self.ui.Status_Bar.showMessage("Failed to connect, Edit > Serial, Restart required", 0)
             OpenSerialDialog()
@@ -89,6 +90,14 @@ class MainWindow(QMainWindow):
             self.ui.Temp.setText(f"{c}°C | {f}°F")
             ah, wh = self.r.amperehour, self.r.watthour
             self.ui.Energy.setText(f"{ah}Ah | {wh}Wh")
+
+            if self.ui.Live_Box.isChecked():
+                if self.r.voltage_set != self.ui.V_Set_SpinBox.value():
+                    with self.l:
+                        self.r.set_voltage_set(self.ui.V_Set_SpinBox.value())
+                if self.r.current_set != self.ui.I_Set_SpinBox.value():
+                    with self.l:
+                        self.r.set_current_set(self.ui.I_Set_SpinBox.value())
 
             with self.l:
                 self.r.update()

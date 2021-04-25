@@ -155,6 +155,11 @@ class Ui_MainWindow(object):
 
         self.V_Set_Layout = QGridLayout()
         self.V_Set_Layout.setObjectName(u"V_Set_Layout")
+        self.V_Set_Button = QToolButton(self.centralwidget)
+        self.V_Set_Button.setObjectName(u"V_Set_Button")
+
+        self.V_Set_Layout.addWidget(self.V_Set_Button, 4, 1, 1, 1)
+
         self.V_Set_SpinBox = QDoubleSpinBox(self.centralwidget)
         self.V_Set_SpinBox.setObjectName(u"V_Set_SpinBox")
         self.V_Set_SpinBox.setFont(font1)
@@ -163,19 +168,6 @@ class Ui_MainWindow(object):
         self.V_Set_SpinBox.setSingleStep(0.100000000000000)
 
         self.V_Set_Layout.addWidget(self.V_Set_SpinBox, 4, 0, 1, 1)
-
-        self.V_Set_Dial = QDial(self.centralwidget)
-        self.V_Set_Dial.setObjectName(u"V_Set_Dial")
-        self.V_Set_Dial.setMaximum(6100)
-        self.V_Set_Dial.setNotchTarget(100.000000000000000)
-        self.V_Set_Dial.setNotchesVisible(True)
-
-        self.V_Set_Layout.addWidget(self.V_Set_Dial, 3, 0, 1, 2)
-
-        self.V_Set_Button = QToolButton(self.centralwidget)
-        self.V_Set_Button.setObjectName(u"V_Set_Button")
-
-        self.V_Set_Layout.addWidget(self.V_Set_Button, 4, 1, 1, 1)
 
         self.V_Set_Label = QLabel(self.centralwidget)
         self.V_Set_Label.setObjectName(u"V_Set_Label")
@@ -189,28 +181,22 @@ class Ui_MainWindow(object):
 
         self.V_Set_Layout.addWidget(self.V_Set_Label, 2, 0, 1, 2)
 
+        self.V_Set_Dial = QDial(self.centralwidget)
+        self.V_Set_Dial.setObjectName(u"V_Set_Dial")
+        self.V_Set_Dial.setMaximum(6100)
+        self.V_Set_Dial.setNotchTarget(100.000000000000000)
+        self.V_Set_Dial.setNotchesVisible(True)
+
+        self.V_Set_Layout.addWidget(self.V_Set_Dial, 3, 0, 1, 2)
+
 
         self.gridLayout.addLayout(self.V_Set_Layout, 0, 0, 1, 1)
 
         self.gridLayout_2 = QGridLayout()
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.Keypad = QLabel(self.centralwidget)
-        self.Keypad.setObjectName(u"Keypad")
-        self.Keypad.setFont(font1)
-        self.Keypad.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_2.addWidget(self.Keypad, 1, 0, 1, 2)
-
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.gridLayout_2.addItem(self.verticalSpacer, 6, 0, 1, 2)
-
-        self.Protection_Label = QLabel(self.centralwidget)
-        self.Protection_Label.setObjectName(u"Protection_Label")
-        self.Protection_Label.setFont(font)
-        self.Protection_Label.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_2.addWidget(self.Protection_Label, 2, 0, 1, 2)
 
         self.Constant = QLabel(self.centralwidget)
         self.Constant.setObjectName(u"Constant")
@@ -233,12 +219,31 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.Protection, 3, 0, 1, 2)
 
+        self.Keypad = QLabel(self.centralwidget)
+        self.Keypad.setObjectName(u"Keypad")
+        self.Keypad.setFont(font1)
+        self.Keypad.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_2.addWidget(self.Keypad, 1, 0, 1, 2)
+
+        self.Protection_Label = QLabel(self.centralwidget)
+        self.Protection_Label.setObjectName(u"Protection_Label")
+        self.Protection_Label.setFont(font)
+        self.Protection_Label.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_2.addWidget(self.Protection_Label, 2, 0, 1, 2)
+
         self.Constant_Label = QLabel(self.centralwidget)
         self.Constant_Label.setObjectName(u"Constant_Label")
         self.Constant_Label.setFont(font)
         self.Constant_Label.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_2.addWidget(self.Constant_Label, 4, 0, 1, 2)
+
+        self.Live_Box = QCheckBox(self.centralwidget)
+        self.Live_Box.setObjectName(u"Live_Box")
+
+        self.gridLayout_2.addWidget(self.Live_Box, 7, 0, 1, 1)
 
 
         self.gridLayout.addLayout(self.gridLayout_2, 0, 1, 2, 1)
@@ -339,12 +344,13 @@ class Ui_MainWindow(object):
         self.OutputS_Button.setText(QCoreApplication.translate("MainWindow", u"Toggle Output", None))
         self.V_Set_Button.setText(QCoreApplication.translate("MainWindow", u"OK", None))
         self.V_Set_Label.setText(QCoreApplication.translate("MainWindow", u"V-Set", None))
-        self.Keypad.setText(QCoreApplication.translate("MainWindow", u"Unlocked", None))
-        self.Protection_Label.setText(QCoreApplication.translate("MainWindow", u"Protection Status", None))
         self.Constant.setText(QCoreApplication.translate("MainWindow", u"None", None))
         self.Keypad_Label.setText(QCoreApplication.translate("MainWindow", u"Keypad Lock", None))
         self.Protection.setText(QCoreApplication.translate("MainWindow", u"None", None))
+        self.Keypad.setText(QCoreApplication.translate("MainWindow", u"Unlocked", None))
+        self.Protection_Label.setText(QCoreApplication.translate("MainWindow", u"Protection Status", None))
         self.Constant_Label.setText(QCoreApplication.translate("MainWindow", u"Constant Status", None))
+        self.Live_Box.setText(QCoreApplication.translate("MainWindow", u"Syncronize V/I Set", None))
         self.I_Set_Button.setText(QCoreApplication.translate("MainWindow", u"OK", None))
         self.I_Set_Label.setText(QCoreApplication.translate("MainWindow", u"I-Set", None))
         self.Menu_File.setTitle(QCoreApplication.translate("MainWindow", u"File", None))

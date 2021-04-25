@@ -123,8 +123,8 @@ class Ui_Settings(object):
         self.Buzzer_Box.setText(QCoreApplication.translate("Settings", u"Buzzer", None))
         self.Language_ComboBox.setItemText(0, QCoreApplication.translate("Settings", u"English", None))
         self.Language_ComboBox.setItemText(1, QCoreApplication.translate("Settings", u"Chinese", None))
-        self.Language_ComboBox.setItemText(2, QCoreApplication.translate("Settings", u"German", None))
-        self.Language_ComboBox.setItemText(3, QCoreApplication.translate("Settings", u"French", None))
+        self.Language_ComboBox.setItemText(2, QCoreApplication.translate("Settings", u"Deutsch", None))
+        self.Language_ComboBox.setItemText(3, QCoreApplication.translate("Settings", u"Fran\u00e7ais", None))
 
     # retranslateUi
 

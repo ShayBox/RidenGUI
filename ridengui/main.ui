@@ -254,6 +254,13 @@
     </item>
     <item row="0" column="0">
      <layout class="QGridLayout" name="V_Set_Layout">
+      <item row="4" column="1">
+       <widget class="QToolButton" name="V_Set_Button">
+        <property name="text">
+         <string>OK</string>
+        </property>
+       </widget>
+      </item>
       <item row="4" column="0">
        <widget class="QDoubleSpinBox" name="V_Set_SpinBox">
         <property name="font">
@@ -269,26 +276,6 @@
         </property>
         <property name="singleStep">
          <double>0.100000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0" colspan="2">
-       <widget class="QDial" name="V_Set_Dial">
-        <property name="maximum">
-         <number>6100</number>
-        </property>
-        <property name="notchTarget">
-         <double>100.000000000000000</double>
-        </property>
-        <property name="notchesVisible">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QToolButton" name="V_Set_Button">
-        <property name="text">
-         <string>OK</string>
         </property>
        </widget>
       </item>
@@ -318,25 +305,23 @@
         </property>
        </widget>
       </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QDial" name="V_Set_Dial">
+        <property name="maximum">
+         <number>6100</number>
+        </property>
+        <property name="notchTarget">
+         <double>100.000000000000000</double>
+        </property>
+        <property name="notchesVisible">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item row="0" column="1" rowspan="2">
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="1" column="0" colspan="2">
-       <widget class="QLabel" name="Keypad">
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string extracomment="Keypad automatically locks when serial is connected">Unlocked</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
       <item row="6" column="0" colspan="2">
        <spacer name="verticalSpacer">
         <property name="orientation">
@@ -349,22 +334,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-      <item row="2" column="0" colspan="2">
-       <widget class="QLabel" name="Protection_Label">
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Protection Status</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
       </item>
       <item row="5" column="0" colspan="2">
        <widget class="QLabel" name="Constant">
@@ -412,6 +381,37 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QLabel" name="Keypad">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string extracomment="Keypad automatically locks when serial is connected">Unlocked</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QLabel" name="Protection_Label">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Protection Status</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
       <item row="4" column="0" colspan="2">
        <widget class="QLabel" name="Constant_Label">
         <property name="font">
@@ -425,6 +425,13 @@
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QCheckBox" name="Live_Box">
+        <property name="text">
+         <string>Syncronize V/I Set</string>
         </property>
        </widget>
       </item>
