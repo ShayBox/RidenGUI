@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="ridengui",
-    version="0.1.0",
+    version="0.1.1",
     description="Riden Qt GUI using Qt for Python (PySide2)",
     url="https://github.com/ShayBox/RidenGUI.git",
     license="MIT",

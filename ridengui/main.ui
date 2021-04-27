@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>RidenPowerSupply</string>
+   <string>RidenGUI</string>
   </property>
   <property name="windowIcon">
    <iconset theme="riden">
@@ -272,7 +272,7 @@
          <set>Qt::AlignCenter</set>
         </property>
         <property name="maximum">
-         <double>61.000000000000000</double>
+         <double>100.000000000000000</double>
         </property>
         <property name="singleStep">
          <double>0.100000000000000</double>
@@ -308,7 +308,7 @@
       <item row="3" column="0" colspan="2">
        <widget class="QDial" name="V_Set_Dial">
         <property name="maximum">
-         <number>6100</number>
+         <number>10000</number>
         </property>
         <property name="notchTarget">
          <double>100.000000000000000</double>
@@ -457,7 +457,7 @@
          <set>Qt::AlignCenter</set>
         </property>
         <property name="maximum">
-         <double>18.100000000000001</double>
+         <double>100.000000000000000</double>
         </property>
         <property name="singleStep">
          <double>0.100000000000000</double>
@@ -467,7 +467,7 @@
       <item row="1" column="0" colspan="2">
        <widget class="QDial" name="I_Set_Dial">
         <property name="maximum">
-         <number>1810</number>
+         <number>10000</number>
         </property>
         <property name="notchTarget">
          <double>100.000000000000000</double>

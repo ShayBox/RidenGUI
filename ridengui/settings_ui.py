@@ -17,7 +17,7 @@ class Ui_Settings(object):
     def setupUi(self, Settings):
         if not Settings.objectName():
             Settings.setObjectName(u"Settings")
-        Settings.resize(400, 288)
+        Settings.resize(312, 288)
         icon = QIcon()
         iconThemeName = u"riden"
         if QIcon.hasThemeIcon(iconThemeName):
@@ -28,41 +28,38 @@ class Ui_Settings(object):
         Settings.setWindowIcon(icon)
         self.gridLayout = QGridLayout(Settings)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.Language_Label = QLabel(Settings)
-        self.Language_Label.setObjectName(u"Language_Label")
-        font = QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        self.Language_Label.setFont(font)
-        self.Language_Label.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout.addWidget(self.Language_Label, 0, 0, 1, 1)
-
-        self.Backlight_Label = QLabel(Settings)
-        self.Backlight_Label.setObjectName(u"Backlight_Label")
-        self.Backlight_Label.setFont(font)
-        self.Backlight_Label.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout.addWidget(self.Backlight_Label, 1, 0, 1, 1)
-
-        self.Time_Button = QPushButton(Settings)
-        self.Time_Button.setObjectName(u"Time_Button")
-
-        self.gridLayout.addWidget(self.Time_Button, 3, 0, 1, 2)
-
         self.Backlight_Slider = QSlider(Settings)
         self.Backlight_Slider.setObjectName(u"Backlight_Slider")
         self.Backlight_Slider.setMaximum(5)
         self.Backlight_Slider.setOrientation(Qt.Horizontal)
 
-        self.gridLayout.addWidget(self.Backlight_Slider, 1, 1, 1, 2)
+        self.gridLayout.addWidget(self.Backlight_Slider, 1, 2, 1, 2)
 
-        self.Buttons = QDialogButtonBox(Settings)
-        self.Buttons.setObjectName(u"Buttons")
-        self.Buttons.setOrientation(Qt.Horizontal)
-        self.Buttons.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.Language_ComboBox = QComboBox(Settings)
+        self.Language_ComboBox.addItem("")
+        self.Language_ComboBox.addItem("")
+        self.Language_ComboBox.addItem("")
+        self.Language_ComboBox.addItem("")
+        self.Language_ComboBox.setObjectName(u"Language_ComboBox")
 
-        self.gridLayout.addWidget(self.Buttons, 3, 2, 1, 1)
+        self.gridLayout.addWidget(self.Language_ComboBox, 0, 2, 1, 2)
+
+        self.Backlight_Label = QLabel(Settings)
+        self.Backlight_Label.setObjectName(u"Backlight_Label")
+        font = QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.Backlight_Label.setFont(font)
+        self.Backlight_Label.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout.addWidget(self.Backlight_Label, 1, 1, 1, 1)
+
+        self.Language_Label = QLabel(Settings)
+        self.Language_Label.setObjectName(u"Language_Label")
+        self.Language_Label.setFont(font)
+        self.Language_Label.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout.addWidget(self.Language_Label, 0, 1, 1, 1)
 
         self.gridLayout_2 = QGridLayout()
         self.gridLayout_2.setObjectName(u"gridLayout_2")
@@ -92,16 +89,19 @@ class Ui_Settings(object):
         self.gridLayout_2.addWidget(self.Buzzer_Box, 4, 0, 1, 1)
 
 
-        self.gridLayout.addLayout(self.gridLayout_2, 2, 0, 1, 3)
+        self.gridLayout.addLayout(self.gridLayout_2, 2, 1, 1, 3)
 
-        self.Language_ComboBox = QComboBox(Settings)
-        self.Language_ComboBox.addItem("")
-        self.Language_ComboBox.addItem("")
-        self.Language_ComboBox.addItem("")
-        self.Language_ComboBox.addItem("")
-        self.Language_ComboBox.setObjectName(u"Language_ComboBox")
+        self.Time_Button = QPushButton(Settings)
+        self.Time_Button.setObjectName(u"Time_Button")
 
-        self.gridLayout.addWidget(self.Language_ComboBox, 0, 1, 1, 2)
+        self.gridLayout.addWidget(self.Time_Button, 6, 1, 1, 1)
+
+        self.Buttons = QDialogButtonBox(Settings)
+        self.Buttons.setObjectName(u"Buttons")
+        self.Buttons.setOrientation(Qt.Horizontal)
+        self.Buttons.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+
+        self.gridLayout.addWidget(self.Buttons, 6, 2, 1, 1)
 
 
         self.retranslateUi(Settings)
@@ -112,19 +112,19 @@ class Ui_Settings(object):
     # setupUi
 
     def retranslateUi(self, Settings):
-        Settings.setWindowTitle(QCoreApplication.translate("Settings", u"Dialog", None))
-        self.Language_Label.setText(QCoreApplication.translate("Settings", u"Language", None))
-        self.Backlight_Label.setText(QCoreApplication.translate("Settings", u"Backlight", None))
-        self.Time_Button.setText(QCoreApplication.translate("Settings", u"Synchronize Time", None))
-        self.Confirm_Box.setText(QCoreApplication.translate("Settings", u"Confirm Dialog", None))
-        self.Logo_Box.setText(QCoreApplication.translate("Settings", u"Logo", None))
-        self.Restore_Box.setText(QCoreApplication.translate("Settings", u"Restore Settings", None))
-        self.Power_Box.setText(QCoreApplication.translate("Settings", u"Boot Power", None))
-        self.Buzzer_Box.setText(QCoreApplication.translate("Settings", u"Buzzer", None))
+        Settings.setWindowTitle(QCoreApplication.translate("Settings", u"Settings", None))
         self.Language_ComboBox.setItemText(0, QCoreApplication.translate("Settings", u"English", None))
         self.Language_ComboBox.setItemText(1, QCoreApplication.translate("Settings", u"Chinese", None))
         self.Language_ComboBox.setItemText(2, QCoreApplication.translate("Settings", u"Deutsch", None))
         self.Language_ComboBox.setItemText(3, QCoreApplication.translate("Settings", u"Fran\u00e7ais", None))
 
+        self.Backlight_Label.setText(QCoreApplication.translate("Settings", u"Backlight", None))
+        self.Language_Label.setText(QCoreApplication.translate("Settings", u"Language", None))
+        self.Confirm_Box.setText(QCoreApplication.translate("Settings", u"Confirm memory state change", None))
+        self.Logo_Box.setText(QCoreApplication.translate("Settings", u"Enable Boot Logo", None))
+        self.Restore_Box.setText(QCoreApplication.translate("Settings", u"Restore state on boot", None))
+        self.Power_Box.setText(QCoreApplication.translate("Settings", u"Power-on after power-loss", None))
+        self.Buzzer_Box.setText(QCoreApplication.translate("Settings", u"Enable Buzzer", None))
+        self.Time_Button.setText(QCoreApplication.translate("Settings", u"Sync Time", None))
     # retranslateUi
 

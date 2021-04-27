@@ -164,7 +164,7 @@ class Ui_MainWindow(object):
         self.V_Set_SpinBox.setObjectName(u"V_Set_SpinBox")
         self.V_Set_SpinBox.setFont(font1)
         self.V_Set_SpinBox.setAlignment(Qt.AlignCenter)
-        self.V_Set_SpinBox.setMaximum(61.000000000000000)
+        self.V_Set_SpinBox.setMaximum(100.000000000000000)
         self.V_Set_SpinBox.setSingleStep(0.100000000000000)
 
         self.V_Set_Layout.addWidget(self.V_Set_SpinBox, 4, 0, 1, 1)
@@ -183,7 +183,7 @@ class Ui_MainWindow(object):
 
         self.V_Set_Dial = QDial(self.centralwidget)
         self.V_Set_Dial.setObjectName(u"V_Set_Dial")
-        self.V_Set_Dial.setMaximum(6100)
+        self.V_Set_Dial.setMaximum(10000)
         self.V_Set_Dial.setNotchTarget(100.000000000000000)
         self.V_Set_Dial.setNotchesVisible(True)
 
@@ -259,14 +259,14 @@ class Ui_MainWindow(object):
         self.I_Set_SpinBox.setObjectName(u"I_Set_SpinBox")
         self.I_Set_SpinBox.setFont(font1)
         self.I_Set_SpinBox.setAlignment(Qt.AlignCenter)
-        self.I_Set_SpinBox.setMaximum(18.100000000000001)
+        self.I_Set_SpinBox.setMaximum(100.000000000000000)
         self.I_Set_SpinBox.setSingleStep(0.100000000000000)
 
         self.I_Set_Layout.addWidget(self.I_Set_SpinBox, 3, 0, 1, 1)
 
         self.I_Set_Dial = QDial(self.centralwidget)
         self.I_Set_Dial.setObjectName(u"I_Set_Dial")
-        self.I_Set_Dial.setMaximum(1810)
+        self.I_Set_Dial.setMaximum(10000)
         self.I_Set_Dial.setNotchTarget(100.000000000000000)
         self.I_Set_Dial.setNotchesVisible(True)
 
@@ -323,7 +323,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"RidenPowerSupply", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"RidenGUI", None))
         self.Action_Quit.setText(QCoreApplication.translate("MainWindow", u"Quit", None))
         self.Action_Settings.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.Action_About.setText(QCoreApplication.translate("MainWindow", u"About", None))

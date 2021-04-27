@@ -6,59 +6,39 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>208</width>
+    <width>306</width>
     <height>256</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Serial</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="riden">
+    <normaloff>.</normaloff>.</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="Serial_Label">
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
+   <item row="7" column="3">
+    <widget class="QDialogButtonBox" name="Buttons">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-     <property name="text">
-      <string>Serial Port</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QLineEdit" name="Serial_Line">
-     <property name="text">
-      <string>/dev/ttyUSB0</string>
+   <item row="5" column="0" colspan="4">
+    <widget class="QSpinBox" name="Address_Box">
+     <property name="minimum">
+      <number>1</number>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="Baudrate_Label">
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Baudrate</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+     <property name="maximum">
+      <number>255</number>
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
+   <item row="3" column="0" colspan="4">
     <widget class="QComboBox" name="Baudrate_Box">
      <item>
       <property name="text">
@@ -87,7 +67,7 @@
      </item>
     </widget>
    </item>
-   <item row="4" column="0">
+   <item row="4" column="0" colspan="4">
     <widget class="QLabel" name="Address_Label">
      <property name="font">
       <font>
@@ -104,23 +84,54 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="0">
-    <widget class="QSpinBox" name="Address_Box">
-     <property name="minimum">
-      <number>1</number>
-     </property>
-     <property name="maximum">
-      <number>255</number>
+   <item row="7" column="0" colspan="3">
+    <widget class="QPushButton" name="Calibrate_Button">
+     <property name="text">
+      <string>Calibrate</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="0">
-    <widget class="QDialogButtonBox" name="Buttons">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+   <item row="2" column="0" colspan="4">
+    <widget class="QLabel" name="Baudrate_Label">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     <property name="text">
+      <string>Baudrate</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="4">
+    <widget class="QLineEdit" name="Serial_Line">
+     <property name="text">
+      <string>/dev/ttyUSB0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="4">
+    <widget class="QLabel" name="Serial_Label">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Serial Port</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>

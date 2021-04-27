@@ -6,58 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>312</width>
     <height>288</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Settings</string>
   </property>
   <property name="windowIcon">
    <iconset theme="riden">
     <normaloff>.</normaloff>.</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="Language_Label">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Language</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="Backlight_Label">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Backlight</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QPushButton" name="Time_Button">
-     <property name="text">
-      <string>Synchronize Time</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1" colspan="2">
+   <item row="1" column="2" colspan="2">
     <widget class="QSlider" name="Backlight_Slider">
      <property name="maximum">
       <number>5</number>
@@ -67,56 +28,7 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="2">
-    <widget class="QDialogButtonBox" name="Buttons">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="3">
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="1" column="0">
-      <widget class="QCheckBox" name="Confirm_Box">
-       <property name="text">
-        <string>Confirm Dialog</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QCheckBox" name="Logo_Box">
-       <property name="text">
-        <string>Logo</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QCheckBox" name="Restore_Box">
-       <property name="text">
-        <string>Restore Settings</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QCheckBox" name="Power_Box">
-       <property name="text">
-        <string>Boot Power</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QCheckBox" name="Buzzer_Box">
-       <property name="text">
-        <string>Buzzer</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="0" column="1" colspan="2">
+   <item row="0" column="2" colspan="2">
     <widget class="QComboBox" name="Language_ComboBox">
      <item>
       <property name="text">
@@ -138,6 +50,94 @@
        <string>Français</string>
       </property>
      </item>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLabel" name="Backlight_Label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Backlight</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="Language_Label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Language</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" colspan="3">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="1" column="0">
+      <widget class="QCheckBox" name="Confirm_Box">
+       <property name="text">
+        <string>Confirm memory state change</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QCheckBox" name="Logo_Box">
+       <property name="text">
+        <string>Enable Boot Logo</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="Restore_Box">
+       <property name="text">
+        <string>Restore state on boot</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QCheckBox" name="Power_Box">
+       <property name="text">
+        <string>Power-on after power-loss</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QCheckBox" name="Buzzer_Box">
+       <property name="text">
+        <string>Enable Buzzer</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="6" column="1">
+    <widget class="QPushButton" name="Time_Button">
+     <property name="text">
+      <string>Sync Time</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <widget class="QDialogButtonBox" name="Buttons">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
     </widget>
    </item>
   </layout>

@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
         # Setup menubar actions
         self.ui.Action_Quit.triggered.connect(self.close)
         self.ui.Action_Settings.triggered.connect(lambda: OpenSettingsDialog(self.r, self.l))
-        self.ui.Action_Serial.triggered.connect(lambda: OpenSerialDialog())
+        self.ui.Action_Serial.triggered.connect(lambda: OpenSerialDialog(self.r, self.l))
 
         # Setup SpinBoxes and Dials
         self.ui.V_Set_SpinBox.valueChanged.connect(lambda v: self.ui.V_Set_Dial.setValue(v * 100))
@@ -30,9 +30,17 @@ class MainWindow(QMainWindow):
 
         # Setup settings
         settings = QSettings("Riden", "settings")
-        port = str(settings.value("serial/port", "/dev/ttyUSB0"))
+        port = str(settings.value("serial/port", "/dev/null"))
         baudrate = int(settings.value("serial/baudrate", 115200))
         address = int(settings.value("serial/address", 1))
+        max_voltage = float(settings.value("serial/max_voltage", 100))
+        max_current = float(settings.value("serial/max_current", 100))
+
+        # Load max voltage/current
+        self.ui.V_Set_Dial.setMaximum(max_voltage * 100)
+        self.ui.V_Set_SpinBox.setMaximum(max_voltage)
+        self.ui.I_Set_Dial.setMaximum(max_current * 100)
+        self.ui.I_Set_SpinBox.setMaximum(max_current)
 
         try:
             # Setup Riden serial library
@@ -50,12 +58,18 @@ class MainWindow(QMainWindow):
             def V_Set_Button_clicked(self):
                 with self.l:
                     self.r.set_voltage_set(self.ui.V_Set_SpinBox.value())
+                    current = self.r.get_current_set()
+                    if current != self.ui.I_Set_SpinBox.value():
+                        self.ui.I_Set_SpinBox.setValue(current)
 
             self.ui.I_Set_Button.clicked.connect(lambda: I_Set_Button_clicked(self))
 
             def I_Set_Button_clicked(self):
                 with self.l:
                     self.r.set_current_set(self.ui.I_Set_SpinBox.value())
+                    voltage = self.r.get_voltage_set()
+                    if voltage != self.ui.V_Set_SpinBox.value():
+                        self.ui.V_Set_SpinBox.setValue(voltage)
 
             self.ui.OutputS_Button.clicked.connect(lambda: OutputS_Button_clicked(self))
 
@@ -91,13 +105,20 @@ class MainWindow(QMainWindow):
             ah, wh = self.r.amperehour, self.r.watthour
             self.ui.Energy.setText(f"{ah}Ah | {wh}Wh")
 
+            # Syncronize dial/spinboxes to unit
             if self.ui.Live_Box.isChecked():
                 if self.r.voltage_set != self.ui.V_Set_SpinBox.value():
                     with self.l:
                         self.r.set_voltage_set(self.ui.V_Set_SpinBox.value())
+                        current = self.r.get_current_set()
+                        if current != self.ui.I_Set_SpinBox.value():
+                            self.ui.I_Set_SpinBox.setValue(current)
                 if self.r.current_set != self.ui.I_Set_SpinBox.value():
                     with self.l:
                         self.r.set_current_set(self.ui.I_Set_SpinBox.value())
+                        voltage = self.r.get_voltage_set()
+                        if voltage != self.ui.V_Set_SpinBox.value():
+                            self.ui.V_Set_SpinBox.setValue(voltage)
 
             with self.l:
                 self.r.update()
