@@ -19,14 +19,20 @@ class MainWindow(QMainWindow):
 
         # Setup menubar actions
         self.ui.Action_Quit.triggered.connect(self.close)
-        self.ui.Action_Settings.triggered.connect(lambda: OpenSettingsDialog(self.r, self.l))
-        self.ui.Action_Serial.triggered.connect(lambda: OpenSerialDialog(self.r, self.l))
+        self.ui.Action_Settings.triggered.connect(
+            lambda: OpenSettingsDialog(self.r, self.l))
+        self.ui.Action_Serial.triggered.connect(
+            lambda: OpenSerialDialog(self.r, self.l))
 
         # Setup SpinBoxes and Dials
-        self.ui.V_Set_SpinBox.valueChanged.connect(lambda v: self.ui.V_Set_Dial.setValue(v * 100))
-        self.ui.V_Set_Dial.valueChanged.connect(lambda v: self.ui.V_Set_SpinBox.setValue(v / 100))
-        self.ui.I_Set_SpinBox.valueChanged.connect(lambda v: self.ui.I_Set_Dial.setValue(v * 100))
-        self.ui.I_Set_Dial.valueChanged.connect(lambda v: self.ui.I_Set_SpinBox.setValue(v / 100))
+        self.ui.V_Set_SpinBox.valueChanged.connect(
+            lambda v: self.ui.V_Set_Dial.setValue(v * 100))
+        self.ui.V_Set_Dial.valueChanged.connect(
+            lambda v: self.ui.V_Set_SpinBox.setValue(v / 100))
+        self.ui.I_Set_SpinBox.valueChanged.connect(
+            lambda v: self.ui.I_Set_Dial.setValue(v * 100))
+        self.ui.I_Set_Dial.valueChanged.connect(
+            lambda v: self.ui.I_Set_SpinBox.setValue(v / 100))
 
         # Setup settings
         settings = QSettings("Riden", "settings")
@@ -53,7 +59,8 @@ class MainWindow(QMainWindow):
             self.t.start()
 
             # Setup Buttons
-            self.ui.V_Set_Button.clicked.connect(lambda: V_Set_Button_clicked(self))
+            self.ui.V_Set_Button.clicked.connect(
+                lambda: V_Set_Button_clicked(self))
 
             def V_Set_Button_clicked(self):
                 with self.l:
@@ -62,7 +69,8 @@ class MainWindow(QMainWindow):
                     if current != self.ui.I_Set_SpinBox.value():
                         self.ui.I_Set_SpinBox.setValue(current)
 
-            self.ui.I_Set_Button.clicked.connect(lambda: I_Set_Button_clicked(self))
+            self.ui.I_Set_Button.clicked.connect(
+                lambda: I_Set_Button_clicked(self))
 
             def I_Set_Button_clicked(self):
                 with self.l:
@@ -71,16 +79,19 @@ class MainWindow(QMainWindow):
                     if voltage != self.ui.V_Set_SpinBox.value():
                         self.ui.V_Set_SpinBox.setValue(voltage)
 
-            self.ui.OutputS_Button.clicked.connect(lambda: OutputS_Button_clicked(self))
+            self.ui.OutputS_Button.clicked.connect(
+                lambda: OutputS_Button_clicked(self))
 
             def OutputS_Button_clicked(self):
                 with self.l:
                     is_checked = self.ui.OutputS_Button.isChecked()
-                    self.ui.OutputS.setText("Enabled" if is_checked else "Disabled")
+                    self.ui.OutputS.setText(
+                        "Enabled" if is_checked else "Disabled")
                     self.r.set_output(is_checked)
 
         except:
-            self.ui.Status_Bar.showMessage("Failed to connect, Edit > Serial, Restart required", 0)
+            self.ui.Status_Bar.showMessage(
+                "Failed to connect, Edit > Serial, Restart required", 0)
             OpenSerialDialog()
 
     def updateUI(self):
