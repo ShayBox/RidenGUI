@@ -39,5 +39,6 @@ class SettingsDialog(QDialog):
 
 def OpenSettingsDialog(r: Riden, l: Lock):
     settings = SettingsDialog(r, l)
+    settings.setModal(True)
     settings.show()
     settings.exec_()
