@@ -2,13 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="ridengui",
-    version="0.1.1",
+    version="0.1.2",
     description="Riden Qt GUI using PySide2",
     url="https://github.com/ShayBox/RidenGUI.git",
     license="MIT",
     author="Shayne Hartford",
     packages=find_packages(),
-    install_requires=["riden"],
+    install_requires=["riden>=0.1.2"],
     entry_points={
         "console_scripts": ["ridengui=ridengui.main:main"],
     },

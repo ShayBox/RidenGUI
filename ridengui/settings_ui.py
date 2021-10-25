@@ -112,7 +112,7 @@ class Ui_Settings(object):
     # setupUi
 
     def retranslateUi(self, Settings):
-        Settings.setWindowTitle(QCoreApplication.translate("Settings", u"Settings", None))
+        Settings.setWindowTitle(QCoreApplication.translate("Settings", u"General", None))
         self.Language_ComboBox.setItemText(0, QCoreApplication.translate("Settings", u"English", None))
         self.Language_ComboBox.setItemText(1, QCoreApplication.translate("Settings", u"Chinese", None))
         self.Language_ComboBox.setItemText(2, QCoreApplication.translate("Settings", u"Deutsch", None))

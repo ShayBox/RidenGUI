@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>306</width>
-    <height>256</height>
+    <width>265</width>
+    <height>149</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,17 +18,51 @@
     <normaloff>.</normaloff>.</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="7" column="3">
-    <widget class="QDialogButtonBox" name="Buttons">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+   <item row="2" column="0">
+    <widget class="QLabel" name="Serial_Label">
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     <property name="text">
+      <string>Serial Port</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="5" column="0" colspan="4">
+   <item row="4" column="0">
+    <widget class="QLabel" name="Baudrate_Label">
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Baudrate</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" colspan="2">
+    <widget class="QLineEdit" name="Serial_Line">
+     <property name="text">
+      <string>/dev/ttyUSB0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1" colspan="2">
     <widget class="QSpinBox" name="Address_Box">
      <property name="minimum">
       <number>1</number>
@@ -38,7 +72,7 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="4">
+   <item row="4" column="1" colspan="2">
     <widget class="QComboBox" name="Baudrate_Box">
      <item>
       <property name="text">
@@ -67,71 +101,30 @@
      </item>
     </widget>
    </item>
-   <item row="4" column="0" colspan="4">
+   <item row="5" column="0">
     <widget class="QLabel" name="Address_Label">
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="text">
       <string>Address</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="7" column="0" colspan="3">
-    <widget class="QPushButton" name="Calibrate_Button">
-     <property name="text">
-      <string>Calibrate</string>
+   <item row="9" column="2">
+    <widget class="QDialogButtonBox" name="Buttons">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="4">
-    <widget class="QLabel" name="Baudrate_Label">
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Baudrate</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="4">
-    <widget class="QLineEdit" name="Serial_Line">
-     <property name="text">
-      <string>/dev/ttyUSB0</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" colspan="4">
-    <widget class="QLabel" name="Serial_Label">
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Serial Port</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
@@ -146,8 +139,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>272</x>
+     <y>249</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -162,8 +155,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>299</x>
+     <y>249</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
