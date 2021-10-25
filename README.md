@@ -20,4 +20,4 @@ All these settings are preserved between RidenGUI restarts.
 Compatible with models RD6006, RD6006P, RD6012, RD6018.
 
 #### Screenshots thumbnail. Full scale ones are in screenshots folder.
-![](screebshots/thumbnails.png)
+![](screenshots/thumbnails.png)
