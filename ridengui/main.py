@@ -1,13 +1,11 @@
-from logging import Formatter
-from PySide2.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox, QLabel
-from ridengui.settings import OpenSettingsDialog
-from ridengui.serial import OpenSerialDialog
-from ridengui.main_ui import Ui_MainWindow
 from PySide2.QtCore import QSettings
-from threading import Lock, Thread
+from PySide2.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel
 from riden import Riden
-from sys import exit
-
+from ridengui.serial import OpenSerialDialog
+from ridengui.settings import OpenSettingsDialog
+from ridengui.ui import Ui_MainWindow
+from threading import Lock, Thread
+import sys
 
 
 class MainWindow(QMainWindow):
@@ -19,20 +17,20 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.ui.Status_Bar.showMessage("Loading...", 1000)
 
-        # remember Toogle button text and prepare other things
+        # Remember Toogle button text and prepare other things
         self.OrigButtonName = self.ui.OutputS_Button.text()
         self.ONStateName = "ON"
         self.ONStateStyle = "background-color: lime;font-size: 36px;"
         self.ONStateStyleCC = "background-color: red;font-size: 36px;"
         self.ONStateStyleCCText = "color:red;"
 
-        # to keep status bar message permanent
+        # To keep status bar message permanent
         self.ui.StBarMessage = QLabel()
         self.ui.Status_Bar.addPermanentWidget(self.ui.StBarMessage)
 
         def setControllsPrecision(self):
-            # precition output formats
-            # display formats on real devices
+            # Precition output formats
+            # Display formats on real devices
             # Model     V      I       P-on<99W P-on>99W
             # RD6006P   00.000 0.0000  00.000   000.00
             # RD6006    00.00  0.000   00.00    000.0
@@ -40,7 +38,6 @@ class MainWindow(QMainWindow):
             # RD6018    00.00  00.00   00.00    000.0
 
             def setPerModel(self):
-
                 def getStepsList(decimals):
                     ilist = []
                     [base] = [1]
@@ -49,12 +46,12 @@ class MainWindow(QMainWindow):
                         base = base / 10
                     return ilist
 
-                # formats used in main display
-                self.oFCu = f'%.{self.Idecimals}f'
-                self.oFVoPo = f'%.{self.Vdecimals}f' # to be like '%.4f'
+                # Formats used in main display
+                self.oFCu = f"%.{self.Idecimals}f"
+                self.oFVoPo = f"%.{self.Vdecimals}f"  # to be like '%.4f'
 
-                #fill IV step drop-downs by entries like 1, 0.1, 0.01, 0.001
-                ilist = getStepsList(self.Idecimals)     
+                # Fill IV step drop-downs by entries like 1, 0.1, 0.01, 0.001
+                ilist = getStepsList(self.Idecimals)
                 self.ui.i_step_box.addItems(ilist)
                 self.ui.I_Set_SpinBox.setDecimals(self.Idecimals)
                 self.ui.I_Set_SpinBox.setSingleStep(float(ilist[-1]))
@@ -65,7 +62,7 @@ class MainWindow(QMainWindow):
                 self.ui.V_Set_SpinBox.setSingleStep(float(vlist[-1]))
 
             model = self.r.type
-            #model = "RD6012" # uncomment for testing
+            # model = "RD6012" # uncomment for testing
             if model == "RD6006P":
                 self.Idecimals = 4
                 self.Vdecimals = 3
@@ -90,58 +87,59 @@ class MainWindow(QMainWindow):
                 setPerModel(self)
                 self.ui.i_max_box.setMaximum(18.1)
 
-
-
         # Setup menubar actions
         self.ui.Action_Quit.triggered.connect(self.close)
         self.ui.Action_Settings.triggered.connect(
-            lambda: OpenSettingsDialog(self.r, self.l))
+            lambda: OpenSettingsDialog(self.r, self.l)
+        )
         self.ui.Action_Serial.triggered.connect(
-            lambda: OpenSerialDialog(self.r, self.l))
-        self.ui.Action_About.triggered.connect(
-            lambda: showAbout())
-
+            lambda: OpenSerialDialog(self.r, self.l)
+        )
+        self.ui.Action_About.triggered.connect(lambda: showAbout())
 
         # Setup SpinBoxes and Dials
         self.ui.V_Set_SpinBox.valueChanged.connect(
-            lambda v: self.ui.V_Set_Dial.setValue(v * self.r.voltage_multiplier))
-        self.ui.V_Set_Dial.valueChanged.connect(            
-            lambda v: self.ui.V_Set_SpinBox.setValue(v / self.r.voltage_multiplier))
+            lambda v: self.ui.V_Set_Dial.setValue(v * self.r.voltage_multiplier)
+        )
+        self.ui.V_Set_Dial.valueChanged.connect(
+            lambda v: self.ui.V_Set_SpinBox.setValue(v / self.r.voltage_multiplier)
+        )
 
         self.ui.I_Set_SpinBox.valueChanged.connect(
-            lambda i: self.ui.I_Set_Dial.setValue(i * self.r.current_multiplier))
-        self.ui.I_Set_Dial.valueChanged.connect(            
-            lambda i: self.ui.I_Set_SpinBox.setValue(i / self.r.current_multiplier))
+            lambda i: self.ui.I_Set_Dial.setValue(i * self.r.current_multiplier)
+        )
+        self.ui.I_Set_Dial.valueChanged.connect(
+            lambda i: self.ui.I_Set_SpinBox.setValue(i / self.r.current_multiplier)
+        )
 
-        self.ui.v_step_box.currentTextChanged.connect(
-            lambda v: VStepChanged(self, v))
-        self.ui.i_step_box.currentTextChanged.connect(
-            lambda v: IStepChanged(self, v))
+        self.ui.v_step_box.currentTextChanged.connect(lambda v: VStepChanged(self, v))
+        self.ui.i_step_box.currentTextChanged.connect(lambda v: IStepChanged(self, v))
 
         def limitsChanged(self, value, param, obj):
-            #print("LOCAL:: " + str(value) + " || Sender: " + str(param))
+            # print("LOCAL:: " + str(value) + " || Sender: " + str(param))
             self.settings.setValue(f"limit/{param}", value)
             readSettings(self)
             loadLimits(self)
 
-
         self.ui.i_max_box.valueChanged.connect(
-            lambda x: limitsChanged(self, x, "max_current", "i_max_box"))
+            lambda x: limitsChanged(self, x, "max_current", "i_max_box")
+        )
         self.ui.i_min_box.valueChanged.connect(
-            lambda x: limitsChanged(self, x, "min_current", "i_min_box"))
+            lambda x: limitsChanged(self, x, "min_current", "i_min_box")
+        )
         self.ui.v_max_box.valueChanged.connect(
-            lambda x: limitsChanged(self, x, "max_voltage", "v_max_box"))
+            lambda x: limitsChanged(self, x, "max_voltage", "v_max_box")
+        )
         self.ui.v_min_box.valueChanged.connect(
-            lambda x: limitsChanged(self, x, "min_voltage", "v_min_box"))
-
-
-
-
+            lambda x: limitsChanged(self, x, "min_voltage", "v_min_box")
+        )
 
         def showAbout():
             msg = QMessageBox()
             msg.setWindowTitle("About")
-            msg.setText('<a href="https://github.com/ShayBox/Riden"> RidenGUI home page </a>')
+            msg.setText(
+                '<a href="https://github.com/ShayBox/Riden"> RidenGUI home page </a>'
+            )
             msg.exec_()
 
         # Read settings
@@ -156,10 +154,6 @@ class MainWindow(QMainWindow):
             self.min_current = float(self.settings.value("limit/min_current", 0))
             self.v_step = self.settings.value("step/voltage", "1")
             self.i_step = self.settings.value("step/current", "1")
-
-        #readSettings(self)
-        
-        
 
         # Load max voltage/current
         def loadLimits(self):
@@ -188,19 +182,18 @@ class MainWindow(QMainWindow):
             decimals = self.ui.v_step_box.currentIndex()
             self.ui.V_Set_SpinBox.setSingleStep(step)
             self.ui.V_Set_SpinBox.setDecimals(decimals)
-            #self.ui.V_Set_Dial.setSingleStep(step)
-            #self.ui.V_Set_Dial.setPageStep(step * 10)  # does not help
+            # self.ui.V_Set_Dial.setSingleStep(step)
+            # self.ui.V_Set_Dial.setPageStep(step * 10)  # does not help
             self.settings.setValue("step/voltage", step)
-        
+
         def IStepChanged(self, i):
             step = float(i)
             decimals = self.ui.i_step_box.currentIndex()
             self.ui.I_Set_SpinBox.setSingleStep(step)
             self.ui.I_Set_SpinBox.setDecimals(decimals)
-            #self.ui.I_Set_Dial.setSingleStep(step)
-            #self.ui.I_Set_Dial.setPageStep(step * 10) # does not help
+            # self.ui.I_Set_Dial.setSingleStep(step)
+            # self.ui.I_Set_Dial.setPageStep(step * 10) # does not help
             self.settings.setValue("step/current", step)
-   
 
         try:
             readSettings(self)
@@ -208,22 +201,27 @@ class MainWindow(QMainWindow):
             self.r = Riden(self.port, self.baudrate, self.address)
             loadLimits(self)
             setControllsPrecision(self)
-            
-            # restore custom VI steps
-            # change if first entry is not with index 0
+
+            # Restore custom VI steps
+            # Change if first entry is not with index 0
             self.ui.v_step_box.setCurrentText(self.v_step)
             self.ui.i_step_box.setCurrentText(self.i_step)
-            # call again for cases when first entry is with index 0 (value "1"), to update other GUI elements
+            # Call again for cases when first entry is with index 0 (value "1"), to update other GUI elements
             VStepChanged(self, self.v_step)
             IStepChanged(self, self.i_step)
 
-            # disable buttons initially, as they should indicate that values were not changed yet
+            # Disable buttons initially, as they should indicate that values were not changed yet
             self.ui.V_Set_Button.setDisabled(True)
             self.ui.I_Set_Button.setDisabled(True)
 
             self.l = Lock()
 
-            message = "Connected to %s using %s | FW: %s | SN: %s" % (self.r.type, self.port, self.r.fw, self.r.sn)
+            message = "Connected to %s using %s | FW: %s | SN: %s" % (
+                self.r.type,
+                self.port,
+                self.r.fw,
+                self.r.sn,
+            )
             self.ui.StBarMessage.setText(message)
 
             # Setup UI thread
@@ -232,8 +230,7 @@ class MainWindow(QMainWindow):
             self.t.start()
 
             # Setup Buttons
-            self.ui.V_Set_Button.clicked.connect(
-                lambda: V_Set_Button_clicked(self))
+            self.ui.V_Set_Button.clicked.connect(lambda: V_Set_Button_clicked(self))
 
             def V_Set_Button_clicked(self):
                 with self.l:
@@ -243,8 +240,7 @@ class MainWindow(QMainWindow):
                         self.ui.I_Set_SpinBox.setValue(current)
                     self.ui.V_Set_Button.setDisabled(True)
 
-            self.ui.I_Set_Button.clicked.connect(
-                lambda: I_Set_Button_clicked(self))
+            self.ui.I_Set_Button.clicked.connect(lambda: I_Set_Button_clicked(self))
 
             def I_Set_Button_clicked(self):
                 with self.l:
@@ -254,20 +250,20 @@ class MainWindow(QMainWindow):
                         self.ui.V_Set_SpinBox.setValue(voltage)
                     self.ui.I_Set_Button.setDisabled(True)
 
-            self.ui.OutputS_Button.clicked.connect(
-                lambda: OutputS_Button_clicked(self))
+            self.ui.OutputS_Button.clicked.connect(lambda: OutputS_Button_clicked(self))
 
             def OutputS_Button_clicked(self):
                 with self.l:
                     is_checked = self.ui.OutputS_Button.isChecked()
                     self.ui.OutputS_Button.setText(
-                        self.ONStateName if is_checked else self.OrigButtonName)
+                        self.ONStateName if is_checked else self.OrigButtonName
+                    )
                     self.ui.OutputS_Button.setStyleSheet(
-                        self.ONStateStyle if is_checked else "")
+                        self.ONStateStyle if is_checked else ""
+                    )
                     self.r.set_output(is_checked)
-        
-            self.ui.Live_Box.clicked.connect(
-                lambda: Live_Box_clicked(self))
+
+            self.ui.Live_Box.clicked.connect(lambda: Live_Box_clicked(self))
 
             def Live_Box_clicked(self):
                 if self.ui.Live_Box.isChecked():
@@ -277,17 +273,17 @@ class MainWindow(QMainWindow):
                     self.ui.I_Set_Button.show()
                     self.ui.V_Set_Button.show()
 
-
         except:
-            message = "Failed to connect. Go to Settings -> Serial. Restart is required."
+            message = (
+                "Failed to connect. Go to Settings -> Serial. Restart is required."
+            )
             self.ui.StBarMessage.setText(message)
             OpenSerialDialog()
-
 
     def updateUI(self):
         with self.l:
             self.r.update()
-        
+
         self.ui.V_Set_SpinBox.setValue(self.r.voltage_set)
         self.ui.I_Set_SpinBox.setValue(self.r.current_set)
         self.ui.OutputS_Button.setChecked(self.r.output)
@@ -296,7 +292,7 @@ class MainWindow(QMainWindow):
 
         while self.t.status:
             constant_string = self.r.constant_string
-            
+
             if self.r.output:
                 self.ui.OutputS_Button.setText(self.ONStateName)
                 if constant_string == "CV":
@@ -306,20 +302,20 @@ class MainWindow(QMainWindow):
             else:
                 self.ui.OutputS_Button.setText(self.OrigButtonName)
 
-
             self.ui.Protection.setText(self.r.protection_string)
             self.ui.CCCV.setText(constant_string)
             self.ui.CCCV.setStyleSheet(
-                    self.ONStateStyleCCText if constant_string == "CC" else "")
+                self.ONStateStyleCCText if constant_string == "CC" else ""
+            )
             self.ui.InputV.setText("Input: " + str(self.r.voltage_input) + " V")
-            
+
             Vo, Cu, Po = self.r.voltage, self.r.current, self.r.power
             self.ui.OutputV.setText(self.oFVoPo % Vo)
             self.ui.OutputC.setText(self.oFCu % Cu)
             self.ui.OutputP.setText(self.oFVoPo % Po)
-            
+
             c, f = self.r.int_temp_c, self.r.int_temp_f
-            self.ui.Temp.setText("Sys temp: "f"{c}°C | {f}°F")
+            self.ui.Temp.setText("Sys temp: " f"{c}°C | {f}°F")
             ah, wh = self.r.amperehour, self.r.watthour
             self.ui.Energy.setText(f"{ah}Ah | {wh}Wh")
 
@@ -338,12 +334,11 @@ class MainWindow(QMainWindow):
                         if voltage != self.ui.V_Set_SpinBox.value():
                             self.ui.V_Set_SpinBox.setValue(voltage)
 
-            # enable buttons it values changed
+            # Enable buttons it values changed
             if self.r.voltage_set != self.ui.V_Set_SpinBox.value():
                 self.ui.V_Set_Button.setDisabled(False)
             if self.r.current_set != self.ui.I_Set_SpinBox.value():
                 self.ui.I_Set_Button.setDisabled(False)
-
 
             with self.l:
                 self.r.update()
@@ -351,15 +346,15 @@ class MainWindow(QMainWindow):
     # Stop UI thread
     def closeEvent(self, *args, **kwargs):
         super(QMainWindow, self).closeEvent(*args, **kwargs)
-        if hasattr(self, 't'):
+        if hasattr(self, "t"):
             self.t.status = False
 
 
 def main():
-    application = QApplication()
+    app = QApplication()
     window = MainWindow()
     window.show()
-    exit(application.exec_())
+    sys.exit(app.exec_())
 
 
 if __name__ == "__main__":

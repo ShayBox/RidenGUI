@@ -2,18 +2,20 @@
 Riden Qt GUI using Qt for Python (PySide2)
 
 #### Install
-Install my [Riden](https://github.com/ShayBox/Riden) library first
+Install [Poetry](https://python-poetry.org/) first
 ```
 git clone https://github.com/ShayBox/RidenGUI.git
 cd RidenGUI
-python setup.py install --user
+poetry build
+pip install --user dist/*.tar.gz
 ```
 
 #### Usage
-A desktop entry for `RidenGUI` and a `ridengui` command are added to your system.
-After very first execution, you will have to specify serial port, apply change and restart application.
-After that you could set GUI V/I limits and change steps. This is, for exampe, handy for safety if you work with low voltage electronics.
-These settings are not the same as OCP and OVP on device itself, they are just limits in this RidenGUI.
+The `ridengui` command is used to start the GUI.  
+A desktop entry and icon are available in the `data` directory.  
+After very first execution, you will have to specify serial port, apply change and restart application.  
+After that you could set GUI V/I limits and change steps. This is, for exampe, handy for safety if you work with low voltage electronics.  
+These settings are not the same as OCP and OVP on device itself, they are just limits in this RidenGUI.  
 All these settings are preserved between RidenGUI restarts.
 
 #### Compatibility

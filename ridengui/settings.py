@@ -1,8 +1,8 @@
-from ridengui.settings_ui import Ui_Settings
-from PySide2.QtWidgets import QDialog
 from datetime import datetime
-from threading import Lock
+from PySide2.QtWidgets import QDialog
 from riden import Riden
+from ridengui.ui import Ui_Settings
+from threading import Lock
 
 
 class SettingsDialog(QDialog):

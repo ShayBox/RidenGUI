@@ -1,8 +1,8 @@
-from PySide2.QtWidgets import QDialog, QMessageBox
-from ridengui.serial_ui import Ui_Serial
 from PySide2.QtCore import QSettings
-from threading import Lock
+from PySide2.QtWidgets import QDialog, QMessageBox
 from riden import Riden
+from ridengui.ui import Ui_Serial
+from threading import Lock
 
 
 class SerialDialog(QDialog):
@@ -28,7 +28,9 @@ class SerialDialog(QDialog):
 
         def save():
             settings.setValue("serial/port", str(self.ui.Serial_Line.text()))
-            settings.setValue("serial/baudrate", int(self.ui.Baudrate_Box.currentText()))
+            settings.setValue(
+                "serial/baudrate", int(self.ui.Baudrate_Box.currentText())
+            )
             settings.setValue("serial/address", int(self.ui.Address_Box.value()))
 
             msg = QMessageBox()
