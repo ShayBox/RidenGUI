@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>765</width>
-    <height>523</height>
+    <width>852</width>
+    <height>570</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <iconset theme="riden">
     <normaloff>../../../../../../opt/Batt-tools/RidenGUI/ridengui</normaloff>../../../../../../opt/Batt-tools/RidenGUI/ridengui</iconset>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="central_widget">
    <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="1">
      <widget class="Line" name="line_3">
@@ -60,7 +60,7 @@
      </widget>
     </item>
     <item row="0" column="4" rowspan="7">
-     <layout class="QVBoxLayout" name="verticalLayout_3">
+     <layout class="QVBoxLayout" name="output_layout">
       <property name="spacing">
        <number>3</number>
       </property>
@@ -77,7 +77,7 @@
        <number>3</number>
       </property>
       <item>
-       <layout class="QGridLayout" name="Main_Display">
+       <layout class="QGridLayout" name="output_display">
         <property name="leftMargin">
          <number>3</number>
         </property>
@@ -94,7 +94,7 @@
          <number>3</number>
         </property>
         <item row="2" column="0">
-         <widget class="QLabel" name="OutputC">
+         <widget class="QLabel" name="output_current">
           <property name="font">
            <font>
             <family>DejaVu Sans Mono</family>
@@ -116,7 +116,7 @@
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QLabel" name="OutputV">
+         <widget class="QLabel" name="output_voltage">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>1</horstretch>
@@ -147,7 +147,7 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLabel" name="OutputV_Label">
+         <widget class="QLabel" name="output_voltage_label">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -169,7 +169,7 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLabel" name="OutputC_Label">
+         <widget class="QLabel" name="output_current_label">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -191,7 +191,7 @@
          </widget>
         </item>
         <item row="3" column="0" colspan="2">
-         <spacer name="verticalSpacer_2">
+         <spacer name="vertical_spacer_2">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -204,7 +204,7 @@
          </spacer>
         </item>
         <item row="1" column="0" colspan="2">
-         <spacer name="verticalSpacer">
+         <spacer name="vertical_spacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -220,7 +220,7 @@
          </spacer>
         </item>
         <item row="4" column="0" rowspan="2">
-         <widget class="QLabel" name="OutputP">
+         <widget class="QLabel" name="output_power">
           <property name="font">
            <font>
             <family>DejaVu Sans Mono</family>
@@ -242,7 +242,7 @@
          </widget>
         </item>
         <item row="4" column="1" rowspan="2">
-         <widget class="QLabel" name="OutputP_Label">
+         <widget class="QLabel" name="output_power_label">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -269,7 +269,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="OutputS_Button">
+       <widget class="QPushButton" name="output_button">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -288,7 +288,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Toggle Output</string>
+         <string/>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -298,7 +298,7 @@
      </layout>
     </item>
     <item row="2" column="0" colspan="3">
-     <layout class="QGridLayout" name="gridLayout_2">
+     <layout class="QGridLayout" name="realtime_layout">
       <property name="leftMargin">
        <number>3</number>
       </property>
@@ -315,7 +315,7 @@
        <number>3</number>
       </property>
       <item row="0" column="1">
-       <widget class="QCheckBox" name="Live_Box">
+       <widget class="QCheckBox" name="realtime_box">
         <property name="enabled">
          <bool>true</bool>
         </property>
@@ -328,7 +328,7 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <spacer name="horizontalSpacer_2">
+       <spacer name="horizontal_spacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -341,7 +341,7 @@
        </spacer>
       </item>
       <item row="0" column="0">
-       <spacer name="horizontalSpacer">
+       <spacer name="horizontal_spacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -356,9 +356,9 @@
      </layout>
     </item>
     <item row="0" column="0">
-     <layout class="QGridLayout" name="State_Textual">
+     <layout class="QGridLayout" name="state_textual">
       <item row="1" column="1">
-       <widget class="QLabel" name="Protection">
+       <widget class="QLabel" name="protection">
         <property name="font">
          <font>
           <pointsize>12</pointsize>
@@ -373,7 +373,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLabel" name="Keypad">
+       <widget class="QLabel" name="keypad">
         <property name="font">
          <font>
           <pointsize>12</pointsize>
@@ -388,7 +388,7 @@
        </widget>
       </item>
       <item row="0" column="0">
-       <widget class="QLabel" name="Keypad_Label">
+       <widget class="QLabel" name="keypad_label">
         <property name="font">
          <font>
           <weight>50</weight>
@@ -404,7 +404,7 @@
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QLabel" name="Constant_Label">
+       <widget class="QLabel" name="constant_label">
         <property name="font">
          <font>
           <weight>50</weight>
@@ -420,7 +420,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLabel" name="CCCV">
+       <widget class="QLabel" name="constant">
         <property name="font">
          <font>
           <pointsize>12</pointsize>
@@ -435,7 +435,7 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="Protection_Label">
+       <widget class="QLabel" name="protection_label">
         <property name="font">
          <font>
           <weight>50</weight>
@@ -453,12 +453,12 @@
      </layout>
     </item>
     <item row="0" column="2">
-     <layout class="QGridLayout" name="State_Numeric">
+     <layout class="QGridLayout" name="state_numeric">
       <property name="rightMargin">
        <number>17</number>
       </property>
       <item row="2" column="0">
-       <widget class="QLabel" name="InputV">
+       <widget class="QLabel" name="input_voltage">
         <property name="font">
          <font>
           <pointsize>12</pointsize>
@@ -473,7 +473,7 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="Temp">
+       <widget class="QLabel" name="temp">
         <property name="font">
          <font>
           <pointsize>12</pointsize>
@@ -488,7 +488,7 @@
        </widget>
       </item>
       <item row="0" column="0">
-       <widget class="QLabel" name="Energy">
+       <widget class="QLabel" name="energy">
         <property name="font">
          <font>
           <pointsize>12</pointsize>
@@ -505,7 +505,7 @@
      </layout>
     </item>
     <item row="4" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="voltage_layout">
       <property name="spacing">
        <number>3</number>
       </property>
@@ -522,7 +522,7 @@
        <number>3</number>
       </property>
       <item>
-       <widget class="QLabel" name="V_Set_Label">
+       <widget class="QLabel" name="v_set_label">
         <property name="font">
          <font>
           <pointsize>10</pointsize>
@@ -540,12 +540,12 @@
          <number>-1</number>
         </property>
         <property name="buddy">
-         <cstring>V_Set_Dial</cstring>
+         <cstring>v_set_dial</cstring>
         </property>
        </widget>
       </item>
       <item>
-       <layout class="QGridLayout" name="gridLayout">
+       <layout class="QGridLayout" name="voltage_steps_layout">
         <property name="leftMargin">
          <number>3</number>
         </property>
@@ -648,7 +648,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QDial" name="V_Set_Dial">
+       <widget class="QDial" name="v_set_dial">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>1</horstretch>
@@ -673,7 +673,7 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="voltage_dial_layout">
         <property name="spacing">
          <number>3</number>
         </property>
@@ -690,7 +690,7 @@
          <number>3</number>
         </property>
         <item>
-         <spacer name="horizontalSpacer_3">
+         <spacer name="horizontal_spacer_3">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -718,7 +718,7 @@
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer_4">
+         <spacer name="horizontal_spacer_4">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -746,7 +746,7 @@
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer_5">
+         <spacer name="horizontal_spacer_5">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -761,7 +761,7 @@
        </layout>
       </item>
       <item>
-       <spacer name="verticalSpacer_3">
+       <spacer name="vertical_spacer_3">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -774,7 +774,7 @@
        </spacer>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <layout class="QHBoxLayout" name="voltage_set_layout">
         <property name="leftMargin">
          <number>3</number>
         </property>
@@ -788,7 +788,7 @@
          <number>3</number>
         </property>
         <item>
-         <widget class="QDoubleSpinBox" name="V_Set_SpinBox">
+         <widget class="QDoubleSpinBox" name="v_set_spinbox">
           <property name="font">
            <font>
             <pointsize>16</pointsize>
@@ -812,7 +812,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="V_Set_Button">
+         <widget class="QToolButton" name="v_set_button">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>1</horstretch>
@@ -834,7 +834,7 @@
      </layout>
     </item>
     <item row="4" column="2">
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="current_layout">
       <property name="spacing">
        <number>3</number>
       </property>
@@ -851,7 +851,7 @@
        <number>3</number>
       </property>
       <item>
-       <widget class="QLabel" name="I_Set_Label">
+       <widget class="QLabel" name="i_set_label">
         <property name="font">
          <font>
           <pointsize>10</pointsize>
@@ -866,12 +866,12 @@
          <set>Qt::AlignCenter</set>
         </property>
         <property name="buddy">
-         <cstring>I_Set_Dial</cstring>
+         <cstring>i_set_dial</cstring>
         </property>
        </widget>
       </item>
       <item>
-       <layout class="QGridLayout" name="gridLayout_4">
+       <layout class="QGridLayout" name="current_steps_layout">
         <property name="leftMargin">
          <number>3</number>
         </property>
@@ -971,7 +971,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QDial" name="I_Set_Dial">
+       <widget class="QDial" name="i_set_dial">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>1</horstretch>
@@ -996,7 +996,7 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <layout class="QHBoxLayout" name="current_dial_layout">
         <property name="spacing">
          <number>3</number>
         </property>
@@ -1013,7 +1013,7 @@
          <number>3</number>
         </property>
         <item>
-         <spacer name="horizontalSpacer_6">
+         <spacer name="horizontal_spacer_6">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -1041,7 +1041,7 @@
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer_7">
+         <spacer name="horizontal_spacer_7">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -1069,7 +1069,7 @@
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer_8">
+         <spacer name="horizontal_spacer_8">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -1084,7 +1084,7 @@
        </layout>
       </item>
       <item>
-       <spacer name="verticalSpacer_4">
+       <spacer name="vertical_spacer_4">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -1097,7 +1097,7 @@
        </spacer>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <layout class="QHBoxLayout" name="current_set_layout">
         <property name="leftMargin">
          <number>3</number>
         </property>
@@ -1111,7 +1111,7 @@
          <number>3</number>
         </property>
         <item>
-         <widget class="QDoubleSpinBox" name="I_Set_SpinBox">
+         <widget class="QDoubleSpinBox" name="i_set_spinbox">
           <property name="font">
            <font>
             <pointsize>16</pointsize>
@@ -1135,7 +1135,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="I_Set_Button">
+         <widget class="QToolButton" name="i_set_button">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>1</horstretch>
@@ -1165,55 +1165,55 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="Menu_Bar">
+  <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>765</width>
-     <height>29</height>
+     <width>852</width>
+     <height>30</height>
     </rect>
    </property>
-   <widget class="QMenu" name="Menu_File">
+   <widget class="QMenu" name="menu_file">
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="Action_Quit"/>
+    <addaction name="action_quit"/>
    </widget>
-   <widget class="QMenu" name="Menu_About">
+   <widget class="QMenu" name="menu_settings">
     <property name="title">
      <string>Settings</string>
     </property>
-    <addaction name="Action_Settings"/>
-    <addaction name="Action_Serial"/>
+    <addaction name="action_general"/>
+    <addaction name="action_serial"/>
    </widget>
-   <widget class="QMenu" name="Menu_Help">
+   <widget class="QMenu" name="menu_help">
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="Action_About"/>
+    <addaction name="action_about"/>
    </widget>
-   <addaction name="Menu_File"/>
-   <addaction name="Menu_About"/>
-   <addaction name="Menu_Help"/>
+   <addaction name="menu_file"/>
+   <addaction name="menu_settings"/>
+   <addaction name="menu_help"/>
   </widget>
-  <widget class="QStatusBar" name="Status_Bar"/>
-  <action name="Action_Quit">
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_quit">
    <property name="text">
     <string>Quit</string>
    </property>
   </action>
-  <action name="Action_Settings">
+  <action name="action_general">
    <property name="text">
     <string>General</string>
    </property>
   </action>
-  <action name="Action_About">
+  <action name="action_about">
    <property name="text">
     <string>About</string>
    </property>
   </action>
-  <action name="Action_Serial">
+  <action name="action_serial">
    <property name="text">
     <string>Serial</string>
    </property>
@@ -1225,8 +1225,8 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>V_Set_Dial</tabstop>
-  <tabstop>I_Set_Dial</tabstop>
+  <tabstop>v_set_dial</tabstop>
+  <tabstop>i_set_dial</tabstop>
  </tabstops>
  <resources/>
  <connections/>

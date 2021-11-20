@@ -19,19 +19,19 @@ class SerialDialog(QDialog):
         baudrate = int(settings.value("serial/baudrate", 115200))
         address = int(settings.value("serial/address", 1))
 
-        self.ui.Serial_Line.setText(port)
-        self.ui.Baudrate_Box.setCurrentText(str(baudrate))
-        self.ui.Address_Box.setValue(address)
+        self.ui.serial_line.setText(port)
+        self.ui.baudrate_box.setCurrentText(str(baudrate))
+        self.ui.address_box.setValue(address)
 
         # Setup OK button
         self.accepted.connect(lambda: save())
 
         def save():
-            settings.setValue("serial/port", str(self.ui.Serial_Line.text()))
+            settings.setValue("serial/port", str(self.ui.serial_line.text()))
             settings.setValue(
-                "serial/baudrate", int(self.ui.Baudrate_Box.currentText())
+                "serial/baudrate", int(self.ui.baudrate_box.currentText())
             )
-            settings.setValue("serial/address", int(self.ui.Address_Box.value()))
+            settings.setValue("serial/address", int(self.ui.address_box.value()))
 
             msg = QMessageBox()
             msg.setWindowTitle("Alert")
@@ -39,7 +39,7 @@ class SerialDialog(QDialog):
             msg.exec_()
 
 
-def OpenSerialDialog(r: Riden = None, l: Lock = None):
+def open_serial(r: Riden = None, l: Lock = None):
     serial = SerialDialog(r, l)
     serial.setModal(True)
     serial.show()

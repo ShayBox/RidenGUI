@@ -19,7 +19,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="2" colspan="2">
-    <widget class="QSlider" name="Backlight_Slider">
+    <widget class="QSlider" name="backlight_slider">
      <property name="maximum">
       <number>5</number>
      </property>
@@ -29,7 +29,7 @@
     </widget>
    </item>
    <item row="0" column="2" colspan="2">
-    <widget class="QComboBox" name="Language_ComboBox">
+    <widget class="QComboBox" name="language_box">
      <item>
       <property name="text">
        <string>English</string>
@@ -53,7 +53,7 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="QLabel" name="Backlight_Label">
+    <widget class="QLabel" name="backlight_label">
      <property name="font">
       <font>
        <weight>75</weight>
@@ -69,7 +69,7 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QLabel" name="Language_Label">
+    <widget class="QLabel" name="language_label">
      <property name="font">
       <font>
        <weight>75</weight>
@@ -85,37 +85,37 @@
     </widget>
    </item>
    <item row="2" column="1" colspan="3">
-    <layout class="QGridLayout" name="gridLayout_2">
+    <layout class="QGridLayout" name="settings_layout">
      <item row="1" column="0">
-      <widget class="QCheckBox" name="Confirm_Box">
+      <widget class="QCheckBox" name="confirm_box">
        <property name="text">
         <string>Confirm memory state change</string>
        </property>
       </widget>
      </item>
      <item row="5" column="0">
-      <widget class="QCheckBox" name="Logo_Box">
+      <widget class="QCheckBox" name="logo_box">
        <property name="text">
         <string>Enable Boot Logo</string>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QCheckBox" name="Restore_Box">
+      <widget class="QCheckBox" name="restore_box">
        <property name="text">
         <string>Restore state on boot</string>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QCheckBox" name="Power_Box">
+      <widget class="QCheckBox" name="power_box">
        <property name="text">
         <string>Power-on after power-loss</string>
        </property>
       </widget>
      </item>
      <item row="4" column="0">
-      <widget class="QCheckBox" name="Buzzer_Box">
+      <widget class="QCheckBox" name="buzzer_box">
        <property name="text">
         <string>Enable Buzzer</string>
        </property>
@@ -124,14 +124,14 @@
     </layout>
    </item>
    <item row="6" column="1">
-    <widget class="QPushButton" name="Time_Button">
+    <widget class="QPushButton" name="time_button">
      <property name="text">
       <string>Sync Time</string>
      </property>
     </widget>
    </item>
    <item row="6" column="2">
-    <widget class="QDialogButtonBox" name="Buttons">
+    <widget class="QDialogButtonBox" name="buttons">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -145,7 +145,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>Buttons</sender>
+   <sender>buttons</sender>
    <signal>accepted()</signal>
    <receiver>Settings</receiver>
    <slot>accept()</slot>
@@ -161,7 +161,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>Buttons</sender>
+   <sender>buttons</sender>
    <signal>rejected()</signal>
    <receiver>Settings</receiver>
    <slot>reject()</slot>
