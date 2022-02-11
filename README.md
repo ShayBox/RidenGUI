@@ -1,13 +1,15 @@
 # RidenGUI
-Riden Qt GUI using Qt for Python (PySide2)
+Riden Qt GUI using PySide2
 
 #### Install
-Install [Poetry](https://python-poetry.org/) first
+Install [Poetry](https://python-poetry.org) first (available via pip)
 ```
 git clone https://github.com/ShayBox/RidenGUI.git
 cd RidenGUI
 poetry build
 pip install --user dist/*.tar.gz
+OR
+pip install --user dist/*.whl
 ```
 
 #### Usage
