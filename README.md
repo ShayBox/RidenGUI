@@ -21,7 +21,8 @@ These settings are not the same as OCP and OVP on device itself, they are just l
 All these settings are preserved between RidenGUI restarts.
 
 #### Compatibility
-Compatible with models RD6006, RD6006P, RD6012, RD6018.
+Compatible with models RD6006, RD6006P, RD6012, and RD6018.
+Pull requests for other models are welcome.
 
 #### Screenshots thumbnail. Full scale ones are in screenshots folder.
 ![](screenshots/thumbnails.png)

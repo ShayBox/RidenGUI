@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>281</width>
-    <height>169</height>
+    <width>292</width>
+    <height>177</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -74,6 +74,37 @@
    </item>
    <item row="4" column="1" colspan="2">
     <widget class="QComboBox" name="baudrate_box">
+     <property name="currentIndex">
+      <number>5</number>
+     </property>
+     <property name="maxCount">
+      <number>1000000</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>1000000</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>921600</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>460800</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>250000</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>230400</string>
+      </property>
+     </item>
      <item>
       <property name="text">
        <string>115200</string>

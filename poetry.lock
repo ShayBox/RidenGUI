@@ -130,7 +130,7 @@ shiboken2 = "5.15.2.1"
 
 [[package]]
 name = "riden"
-version = "0.2.1"
+version = "0.2.2"
 description = "A python library for Riden RD60XX power supplies"
 category = "main"
 optional = false
@@ -145,7 +145,7 @@ pyserial = "^3.5"
 type = "git"
 url = "https://github.com/shaybox/riden.git"
 reference = "master"
-resolved_reference = "65f922f404d741f828f8c8f38f1dc93bf98c9fd6"
+resolved_reference = "3c88df4eec3c9096bd71148180d5052e3c394890"
 
 [[package]]
 name = "shiboken2"

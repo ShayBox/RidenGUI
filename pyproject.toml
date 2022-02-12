@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "RidenGUI"
-version = "0.2.1"
+version = "0.2.2"
 description = "Riden Qt GUI using PySide2"
 license = "MIT"
 authors = ["Shayne Hartford <shaybox@shaybox.com>"]
@@ -9,7 +9,7 @@ repository = "https://github.com/ShayBox/RidenGUI.git"
 
 [tool.poetry.dependencies]
 python = ">=3.6.2,<3.11"
-riden = { git = "https://github.com/shaybox/riden.git" }
+riden = {git = "https://github.com/shaybox/riden.git"}
 PySide2 = "^5.15.2"
 
 [tool.poetry.dev-dependencies]
@@ -21,4 +21,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 ridengui = "ridengui.main:main"
-ridengenui = "ridengui.genui:main"
+ridengenui = "ridengui.gen:gen"
