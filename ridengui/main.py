@@ -1,12 +1,17 @@
+# Built-in modules
+import signal
+import sys
+from threading import Lock, Thread
+
+# Third-party modules
 from PySide2.QtCore import QSettings
-from PySide2.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel
+from PySide2.QtWidgets import QApplication, QLabel, QMainWindow, QMessageBox
 from riden import Riden
+
+# Local modules
 from ridengui.serial import open_serial
 from ridengui.settings import open_general
 from ridengui.ui import Ui_MainWindow
-from threading import Lock, Thread
-import signal
-import sys
 
 
 class MainWindow(QMainWindow):
@@ -97,17 +102,17 @@ class MainWindow(QMainWindow):
 
         # Setup SpinBoxes and Dials
         self.ui.v_set_spinbox.valueChanged.connect(
-            lambda v: self.ui.v_set_dial.setValue(v * self.r.voltage_multiplier)
+            lambda v: self.ui.v_set_dial.setValue(v * self.r.v_multi)
         )
         self.ui.v_set_dial.valueChanged.connect(
-            lambda v: self.ui.v_set_spinbox.setValue(v / self.r.voltage_multiplier)
+            lambda v: self.ui.v_set_spinbox.setValue(v / self.r.v_multi)
         )
 
         self.ui.i_set_spinbox.valueChanged.connect(
-            lambda i: self.ui.i_set_dial.setValue(i * self.r.current_multiplier)
+            lambda i: self.ui.i_set_dial.setValue(i * self.r.i_multi)
         )
         self.ui.i_set_dial.valueChanged.connect(
-            lambda i: self.ui.i_set_spinbox.setValue(i / self.r.current_multiplier)
+            lambda i: self.ui.i_set_spinbox.setValue(i / self.r.i_multi)
         )
 
         self.ui.v_step_box.currentTextChanged.connect(lambda v: v_step_changed(self, v))
@@ -155,22 +160,22 @@ class MainWindow(QMainWindow):
 
         # Load max voltage/current
         def load_limits(self):
-            self.ui.v_set_dial.setMaximum(self.max_voltage * self.r.voltage_multiplier)
+            self.ui.v_set_dial.setMaximum(self.max_voltage * self.r.v_multi)
             self.ui.v_set_spinbox.setMaximum(self.max_voltage)
             self.ui.v_max_box.setValue(self.max_voltage)
             self.ui.v_max_lab.setText(str(self.max_voltage))
 
-            self.ui.v_set_dial.setMinimum(self.min_voltage * self.r.voltage_multiplier)
+            self.ui.v_set_dial.setMinimum(self.min_voltage * self.r.v_multi)
             self.ui.v_set_spinbox.setMinimum(self.min_voltage)
             self.ui.v_min_box.setValue(self.min_voltage)
             self.ui.v_min_lab.setText(str(self.min_voltage))
 
-            self.ui.i_set_dial.setMaximum(self.max_current * self.r.current_multiplier)
+            self.ui.i_set_dial.setMaximum(self.max_current * self.r.i_multi)
             self.ui.i_set_spinbox.setMaximum(self.max_current)
             self.ui.i_max_box.setValue(self.max_current)
             self.ui.i_max_lab.setText(str(self.max_current))
 
-            self.ui.i_set_dial.setMinimum(self.min_current * self.r.current_multiplier)
+            self.ui.i_set_dial.setMinimum(self.min_current * self.r.i_multi)
             self.ui.i_set_spinbox.setMinimum(self.min_current)
             self.ui.i_min_box.setValue(self.min_current)
             self.ui.i_min_lab.setText(str(self.min_current))
@@ -193,103 +198,103 @@ class MainWindow(QMainWindow):
             # self.ui.i_set_dial.setPageStep(step * 10) # does not help
             self.settings.setValue("step/current", step)
 
-        try:
-            read_settings(self)
-            # Setup Riden serial library
-            self.r = Riden(self.port, self.baudrate, self.address)
-            load_limits(self)
-            set_controlls_precision(self)
+        # try:
+        read_settings(self)
+        # Setup Riden serial library
+        self.r = Riden(self.port, self.baudrate, self.address)
+        load_limits(self)
+        set_controlls_precision(self)
 
-            # Restore custom VI steps
-            # Change if first entry is not with index 0
-            self.ui.v_step_box.setCurrentText(self.v_step)
-            self.ui.i_step_box.setCurrentText(self.i_step)
-            # Call again for cases when first entry is with index 0 (value "1"), to update other GUI elements
-            v_step_changed(self, self.v_step)
-            i_step_changed(self, self.i_step)
+        # Restore custom VI steps
+        # Change if first entry is not with index 0
+        self.ui.v_step_box.setCurrentText(self.v_step)
+        self.ui.i_step_box.setCurrentText(self.i_step)
+        # Call again for cases when first entry is with index 0 (value "1"), to update other GUI elements
+        v_step_changed(self, self.v_step)
+        i_step_changed(self, self.i_step)
 
-            # Disable buttons initially, as they should indicate that values were not changed yet
-            self.ui.v_set_button.setDisabled(True)
-            self.ui.i_set_button.setDisabled(True)
+        # Disable buttons initially, as they should indicate that values were not changed yet
+        self.ui.v_set_button.setDisabled(True)
+        self.ui.i_set_button.setDisabled(True)
 
-            self.l = Lock()
+        self.l = Lock()
 
-            message = "Connected to %s using %s | FW: %s | SN: %s" % (
-                self.r.type,
-                self.port,
-                self.r.fw,
-                self.r.sn,
-            )
-            self.ui.statusbar_message.setText(message)
+        message = "Connected to %s using %s | FW: %s | SN: %s" % (
+            self.r.type,
+            self.port,
+            self.r.fw,
+            self.r.sn,
+        )
+        self.ui.statusbar_message.setText(message)
 
-            # Setup UI thread
-            self.t = Thread(target=self.update_ui)
-            self.t.status = True
-            self.t.start()
+        # Setup UI thread
+        self.t = Thread(target=self.update_ui)
+        self.t.status = True
+        self.t.start()
 
-            # Setup Buttons
-            self.ui.v_set_button.clicked.connect(lambda: v_set_button_clicked(self))
+        # Setup Buttons
+        self.ui.v_set_button.clicked.connect(lambda: v_set_button_clicked(self))
 
-            def v_set_button_clicked(self):
-                with self.l:
-                    self.r.set_voltage_set(self.ui.v_set_spinbox.value())
-                    current = self.r.get_current_set()
-                    if current != self.ui.i_set_spinbox.value():
-                        self.ui.i_set_spinbox.setValue(current)
-                    self.ui.v_set_button.setDisabled(True)
+        def v_set_button_clicked(self):
+            with self.l:
+                self.r.set_v_set(self.ui.v_set_spinbox.value())
+                current = self.r.get_i_set()
+                if current != self.ui.i_set_spinbox.value():
+                    self.ui.i_set_spinbox.setValue(current)
+                self.ui.v_set_button.setDisabled(True)
 
-            self.ui.i_set_button.clicked.connect(lambda: i_set_button_clicked(self))
+        self.ui.i_set_button.clicked.connect(lambda: i_set_button_clicked(self))
 
-            def i_set_button_clicked(self):
-                with self.l:
-                    self.r.set_current_set(self.ui.i_set_spinbox.value())
-                    voltage = self.r.get_voltage_set()
-                    if voltage != self.ui.v_set_spinbox.value():
-                        self.ui.v_set_spinbox.setValue(voltage)
-                    self.ui.i_set_button.setDisabled(True)
+        def i_set_button_clicked(self):
+            with self.l:
+                self.r.set_i_set(self.ui.i_set_spinbox.value())
+                voltage = self.r.get_v_set()
+                if voltage != self.ui.v_set_spinbox.value():
+                    self.ui.v_set_spinbox.setValue(voltage)
+                self.ui.i_set_button.setDisabled(True)
 
-            self.ui.output_button.clicked.connect(lambda: output_button_clicked(self))
+        self.ui.output_button.clicked.connect(lambda: output_button_clicked(self))
 
-            def output_button_clicked(self):
-                with self.l:
-                    is_checked = self.ui.output_button.isChecked()
-                    self.ui.output_button.setText(
-                        self.on_state_name if is_checked else self.off_state_name
-                    )
-                    self.ui.output_button.setStyleSheet(
-                        self.on_state_style if is_checked else self.off_state_style
-                    )
-                    self.r.set_output(is_checked)
+        def output_button_clicked(self):
+            with self.l:
+                is_checked = self.ui.output_button.isChecked()
+                self.ui.output_button.setText(
+                    self.on_state_name if is_checked else self.off_state_name
+                )
+                self.ui.output_button.setStyleSheet(
+                    self.on_state_style if is_checked else self.off_state_style
+                )
+                self.r.set_output(is_checked)
 
-            self.ui.realtime_box.clicked.connect(lambda: realtime_box_clicked(self))
+        self.ui.realtime_box.clicked.connect(lambda: realtime_box_clicked(self))
 
-            def realtime_box_clicked(self):
-                if self.ui.realtime_box.isChecked():
-                    self.ui.i_set_button.hide()
-                    self.ui.v_set_button.hide()
-                else:
-                    self.ui.i_set_button.show()
-                    self.ui.v_set_button.show()
+        def realtime_box_clicked(self):
+            if self.ui.realtime_box.isChecked():
+                self.ui.i_set_button.hide()
+                self.ui.v_set_button.hide()
+            else:
+                self.ui.i_set_button.show()
+                self.ui.v_set_button.show()
 
-        except:
-            message = (
-                "Failed to connect. Go to Settings -> Serial. Restart is required."
-            )
-            self.ui.statusbar_message.setText(message)
-            open_serial()
+        # except:
+        #     message = (
+        #         "Failed to connect. Go to Settings -> Serial. Restart is required."
+        #     )
+        #     self.ui.statusbar_message.setText(message)
+        #     open_serial()
 
     def update_ui(self):
         with self.l:
             self.r.update()
 
-        self.ui.v_set_spinbox.setValue(self.r.voltage_set)
-        self.ui.i_set_spinbox.setValue(self.r.current_set)
+        self.ui.v_set_spinbox.setValue(self.r.v_set)
+        self.ui.i_set_spinbox.setValue(self.r.i_set)
         self.ui.output_button.setChecked(self.r.output)
 
-        self.ui.keypad.setText("Locked" if self.r.keypad_lock else "Unlocked")
+        self.ui.keypad.setText("Locked" if self.r.keypad else "Unlocked")
 
         while self.t.status:
-            constant_string = self.r.constant_string
+            constant_string = self.r.cv_cc
 
             if self.r.output:
                 self.ui.output_button.setText(self.on_state_name)
@@ -300,42 +305,42 @@ class MainWindow(QMainWindow):
             else:
                 self.ui.output_button.setText(self.off_state_name)
 
-            self.ui.protection.setText(self.r.protection_string)
+            self.ui.protection.setText(self.r.ovp_ocp)
             self.ui.constant.setText(constant_string)
             self.ui.constant.setStyleSheet(
                 self.style_cc_text if constant_string == "CC" else ""
             )
-            self.ui.input_voltage.setText("Input: " + str(self.r.voltage_input) + " V")
+            self.ui.input_voltage.setText("Input: " + str(self.r.v_in) + " V")
 
-            Vo, Cu, Po = self.r.voltage, self.r.current, self.r.power
+            Vo, Cu, Po = self.r.v_out, self.r.i_out, self.r.p_out
             self.ui.output_voltage.setText(self.oFVoPo % Vo)
             self.ui.output_current.setText(self.oFCu % Cu)
             self.ui.output_power.setText(self.oFVoPo % Po)
 
-            c, f = self.r.int_temp_c, self.r.int_temp_f
+            c, f = self.r.int_c, self.r.int_f
             self.ui.temp.setText("Sys temp: " f"{c}°C | {f}°F")
-            ah, wh = self.r.amperehour, self.r.watthour
+            ah, wh = self.r.ah, self.r.wh
             self.ui.energy.setText(f"{ah}Ah | {wh}Wh")
 
             # Syncronize dial/spinboxes to unit
             if self.ui.realtime_box.isChecked():
-                if self.r.voltage_set != self.ui.v_set_spinbox.value():
+                if self.r.v_set != self.ui.v_set_spinbox.value():
                     with self.l:
-                        self.r.set_voltage_set(self.ui.v_set_spinbox.value())
-                        current = self.r.get_current_set()
+                        self.r.set_v_set(self.ui.v_set_spinbox.value())
+                        current = self.r.get_i_set()
                         if current != self.ui.i_set_spinbox.value():
                             self.ui.i_set_spinbox.setValue(current)
-                if self.r.current_set != self.ui.i_set_spinbox.value():
+                if self.r.i_set != self.ui.i_set_spinbox.value():
                     with self.l:
-                        self.r.set_current_set(self.ui.i_set_spinbox.value())
-                        voltage = self.r.get_voltage_set()
+                        self.r.set_i_set(self.ui.i_set_spinbox.value())
+                        voltage = self.r.get_v_set()
                         if voltage != self.ui.v_set_spinbox.value():
                             self.ui.v_set_spinbox.setValue(voltage)
 
             # Enable buttons it values changed
-            if self.r.voltage_set != self.ui.v_set_spinbox.value():
+            if self.r.v_set != self.ui.v_set_spinbox.value():
                 self.ui.v_set_button.setDisabled(False)
-            if self.r.current_set != self.ui.i_set_spinbox.value():
+            if self.r.i_set != self.ui.i_set_spinbox.value():
                 self.ui.i_set_button.setDisabled(False)
 
             with self.l:

@@ -1,8 +1,13 @@
+# Built-in modules
 from datetime import datetime
+from threading import Lock
+
+# Third-party modules
 from PySide2.QtWidgets import QDialog
 from riden import Riden
+
+# Local modules
 from ridengui.ui import Ui_Settings
-from threading import Lock
 
 
 class GeneralDialog(QDialog):
@@ -14,13 +19,13 @@ class GeneralDialog(QDialog):
         self.ui.setupUi(self)
 
         with l:
-            self.ui.language_box.setCurrentIndex(r.get_language())
-            self.ui.backlight_slider.setSliderPosition(r.get_backlight())
-            self.ui.confirm_box.setChecked(r.is_confirm())
-            self.ui.restore_box.setChecked(r.is_restore())
-            self.ui.power_box.setChecked(r.is_boot_power())
-            self.ui.buzzer_box.setChecked(r.is_buzzer())
-            self.ui.logo_box.setChecked(r.is_boot_logo())
+            self.ui.language_box.setCurrentIndex(r.get_lang())
+            self.ui.backlight_slider.setSliderPosition(r.get_light())
+            self.ui.confirm_box.setChecked(r.is_take_ok())
+            self.ui.restore_box.setChecked(r.is_take_out())
+            self.ui.power_box.setChecked(r.is_boot_pow())
+            self.ui.buzzer_box.setChecked(r.is_buzz())
+            self.ui.logo_box.setChecked(r.is_logo())
 
         self.ui.time_button.clicked.connect(lambda: r.set_date_time(datetime.now()))
 
@@ -28,13 +33,13 @@ class GeneralDialog(QDialog):
         self.accepted.connect(lambda: save())
 
         def save():
-            r.set_language(self.ui.language_box.currentIndex())
-            r.set_backlight(self.ui.backlight_slider.value())
-            r.set_confirm(self.ui.confirm_box.isChecked())
-            r.set_restore(self.ui.restore_box.isChecked())
-            r.set_boot_power(self.ui.power_box.isChecked())
-            r.set_buzzer(self.ui.buzzer_box.isChecked())
-            r.set_boot_logo(self.ui.logo_box.isChecked())
+            r.set_lang(self.ui.language_box.currentIndex())
+            r.set_light(self.ui.backlight_slider.value())
+            r.set_take_ok(self.ui.confirm_box.isChecked())
+            r.set_take_out(self.ui.restore_box.isChecked())
+            r.set_boot_pow(self.ui.power_box.isChecked())
+            r.set_buzz(self.ui.buzzer_box.isChecked())
+            r.set_logo(self.ui.logo_box.isChecked())
 
 
 def open_general(r: Riden, l: Lock):

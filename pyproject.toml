@@ -8,9 +8,9 @@ homepage = "https://github.com/ShayBox/RidenGUI"
 repository = "https://github.com/ShayBox/RidenGUI.git"
 
 [tool.poetry.dependencies]
-python = ">=3.6.2,<3.11"
-riden = {git = "https://github.com/shaybox/riden.git"}
 PySide2 = "^5.15.2"
+python = ">=3.7,<3.11"
+riden = { git = "https://github.com/shaybox/riden.git" }
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"

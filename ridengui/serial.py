@@ -1,8 +1,13 @@
+# Built-in modules
+from threading import Lock
+
+# Third-party modules
 from PySide2.QtCore import QSettings
 from PySide2.QtWidgets import QDialog, QMessageBox
 from riden import Riden
+
+# Local modules
 from ridengui.ui import Ui_Serial
-from threading import Lock
 
 
 class SerialDialog(QDialog):
