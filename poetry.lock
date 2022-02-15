@@ -43,7 +43,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
 name = "importlib-metadata"
-version = "4.11.0"
+version = "4.11.1"
 description = "Read metadata from Python packages"
 category = "main"
 optional = false
@@ -56,7 +56,7 @@ zipp = ">=0.5"
 [package.extras]
 docs = ["sphinx", "jaraco.packaging (>=8.2)", "rst.linker (>=1.9)"]
 perf = ["ipython"]
-testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "packaging", "pyfakefs", "flufl.flake8", "pytest-perf (>=0.9.2)", "pytest-black (>=0.3.7)", "pytest-mypy", "importlib-resources (>=1.3)"]
+testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "packaging", "pyfakefs", "flufl.flake8", "pytest-perf (>=0.9.2)", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)", "importlib-resources (>=1.3)"]
 
 [[package]]
 name = "modbus-tk"
@@ -120,6 +120,17 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <3.11"
 shiboken2 = "5.15.2.1"
 
 [[package]]
+name = "pyside6"
+version = "6.2.3"
+description = "Python bindings for the Qt cross-platform application and UI framework"
+category = "main"
+optional = false
+python-versions = ">=3.6, <3.11"
+
+[package.dependencies]
+shiboken6 = "6.2.3"
+
+[[package]]
 name = "riden"
 version = "1.0.0"
 description = "A python library for Riden RD power supplies"
@@ -148,6 +159,14 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <3.11"
 
 [[package]]
+name = "shiboken6"
+version = "6.2.3"
+description = "Python / C++ bindings helper module"
+category = "main"
+optional = false
+python-versions = ">=3.6, <3.11"
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -165,7 +184,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "typing-extensions"
-version = "4.1.0"
+version = "4.1.1"
 description = "Backported and Experimental Type Hints for Python 3.6+"
 category = "main"
 optional = false
@@ -183,10 +202,16 @@ python-versions = ">=3.7"
 docs = ["sphinx", "jaraco.packaging (>=8.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
+[extras]
+PyQt5 = []
+PyQt6 = []
+PySide2 = ["PySide2"]
+PySide6 = ["PySide6"]
+
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<3.11"
-content-hash = "1a65089d2aa5451d3dcb9d0a864bde85d67768787822309ddcd73be4743a1a98"
+content-hash = "06e7a84504f4e117f945d82b81820a85597325b20ddce64947db9c15faa0928b"
 
 [metadata.files]
 black = [
@@ -223,8 +248,8 @@ colorama = [
     {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
 ]
 importlib-metadata = [
-    {file = "importlib_metadata-4.11.0-py3-none-any.whl", hash = "sha256:6affcdb3aec542dd98df8211e730bba6c5f2bec8288d47bacacde898f548c9ad"},
-    {file = "importlib_metadata-4.11.0.tar.gz", hash = "sha256:9e5e553bbba1843cb4a00823014b907616be46ee503d2b9ba001d214a8da218f"},
+    {file = "importlib_metadata-4.11.1-py3-none-any.whl", hash = "sha256:e0bc84ff355328a4adfc5240c4f211e0ab386f80aa640d1b11f0618a1d282094"},
+    {file = "importlib_metadata-4.11.1.tar.gz", hash = "sha256:175f4ee440a0317f6e8d81b7f8d4869f93316170a65ad2b007d2929186c8052c"},
 ]
 modbus-tk = [
     {file = "modbus_tk-1.1.2.tar.gz", hash = "sha256:893514bbd8c92118d20a19979e0239e7cb2a63f8f1795a0271e57def09d11770"},
@@ -253,6 +278,11 @@ pyside2 = [
     {file = "PySide2-5.15.2.1-5.15.2-cp35.cp36.cp37.cp38.cp39.cp310-none-win32.whl", hash = "sha256:439509e53cfe05abbf9a99422a2cbad086408b0f9bf5e6f642ff1b13b1f8b055"},
     {file = "PySide2-5.15.2.1-5.15.2-cp35.cp36.cp37.cp38.cp39.cp310-none-win_amd64.whl", hash = "sha256:af6b263fe63ba6dea7eaebae80aa7b291491fe66f4f0057c0aafe780cc83da9d"},
 ]
+pyside6 = [
+    {file = "PySide6-6.2.3-6.2.3-cp36.cp37.cp38.cp39.cp310-abi3-macosx_10_14_universal2.whl", hash = "sha256:505a3dcd1894ed4acff9ae600faff1d88873550c0cb66029ff4f59edbd4ecc1b"},
+    {file = "PySide6-6.2.3-6.2.3-cp36.cp37.cp38.cp39.cp310-abi3-manylinux1_x86_64.whl", hash = "sha256:825fe460d4f9775b729792bbc826f6b41cc10641d4809875077cc54d63a982ba"},
+    {file = "PySide6-6.2.3-6.2.3-cp36.cp37.cp38.cp39.cp310-none-win_amd64.whl", hash = "sha256:911423ff07f5d04c569a2aececc6960c63f341147405591cd6328769022b8e2b"},
+]
 riden = []
 shiboken2 = [
     {file = "shiboken2-5.15.2.1-5.15.2-cp27-cp27m-macosx_10_13_intel.whl", hash = "sha256:f890f5611ab8f48b88cfecb716da2ac55aef99e2923198cefcf781842888ea65"},
@@ -261,6 +291,11 @@ shiboken2 = [
     {file = "shiboken2-5.15.2.1-5.15.2-cp35.cp36.cp37.cp38.cp39.cp310-abi3-manylinux1_x86_64.whl", hash = "sha256:63debfcc531b6a2b4985aa9b71433d2ad3bac542acffc729cc0ecaa3854390c0"},
     {file = "shiboken2-5.15.2.1-5.15.2-cp35.cp36.cp37.cp38.cp39.cp310-none-win32.whl", hash = "sha256:eb0da44b6fa60c6bd317b8f219e500595e94e0322b33ec5b4e9f406bedaee555"},
     {file = "shiboken2-5.15.2.1-5.15.2-cp35.cp36.cp37.cp38.cp39.cp310-none-win_amd64.whl", hash = "sha256:a0d0fdeb12b72c8af349b9642ccc67afd783dca449309f45e78cda50272fd6b7"},
+]
+shiboken6 = [
+    {file = "shiboken6-6.2.3-6.2.3-cp36.cp37.cp38.cp39.cp310-abi3-macosx_10_14_universal2.whl", hash = "sha256:857b0cdd09a43df48502b177b788d2e5f92e40b3e6e90f13d5cef24bbdde0f16"},
+    {file = "shiboken6-6.2.3-6.2.3-cp36.cp37.cp38.cp39.cp310-abi3-manylinux1_x86_64.whl", hash = "sha256:daf0dbe18a6272d9fa38e1143a98d6828e4c7428a423afacba0779476a3ed027"},
+    {file = "shiboken6-6.2.3-6.2.3-cp36.cp37.cp38.cp39.cp310-none-win_amd64.whl", hash = "sha256:fbdb17c4708566511dbad351090255756b84f87e0d971cc9a5241c48de6e8b4d"},
 ]
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
@@ -293,8 +328,8 @@ typed-ast = [
     {file = "typed_ast-1.5.2.tar.gz", hash = "sha256:525a2d4088e70a9f75b08b3f87a51acc9cde640e19cc523c7e41aa355564ae27"},
 ]
 typing-extensions = [
-    {file = "typing_extensions-4.1.0-py3-none-any.whl", hash = "sha256:c13180fbaa7cd97065a4915ceba012bdb31dc34743e63ddee16360161d358414"},
-    {file = "typing_extensions-4.1.0.tar.gz", hash = "sha256:ba97c5143e5bb067b57793c726dd857b1671d4b02ced273ca0538e71ff009095"},
+    {file = "typing_extensions-4.1.1-py3-none-any.whl", hash = "sha256:21c85e0fe4b9a155d0799430b0ad741cdce7e359660ccbd8b530613e8df88ce2"},
+    {file = "typing_extensions-4.1.1.tar.gz", hash = "sha256:1a9462dcc3347a79b1f1c0271fbe79e844580bb598bafa1ed208b94da3cdcd42"},
 ]
 zipp = [
     {file = "zipp-3.7.0-py3-none-any.whl", hash = "sha256:b47250dd24f92b7dd6a0a8fc5244da14608f3ca90a5efcd37a3b1642fac9a375"},

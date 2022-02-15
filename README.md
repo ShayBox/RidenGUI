@@ -1,28 +1,32 @@
 # RidenGUI
-Riden Qt GUI using PySide2
 
-#### Install
-Install [Poetry](https://python-poetry.org) first (available via pip)
+Qt 5/6 based GUI for Riden RDXX power supplies written in Python
+
+#### Screenshots
+![MainWindow](screenshots/mainwindow.png)  
+![SettingsWizard1](screenshots/settingswizard1.png)
+![SettingsWizard2](screenshots/settingswizard2.png)
+
+#### Issues
+Please report and discuss issues on [Discussions]
+
+#### Installation
+Requirements:
+- [Python] 3.7 or later
+- PySide2 (Qt5) or PySide6 (Qt6)
 ```
-git clone https://github.com/ShayBox/RidenGUI.git
-cd RidenGUI
-poetry build
-pip install --user dist/*.tar.gz
-OR
-pip install --user dist/*.whl
+$ pip install --user pyside2
+$ pip install --user git+https://github.com/shaybox/ridengui.git
+```
+
+Adding to an existing poetry project:
+```
+$ poetry add git+https://github.com/shaybox/ridengui.git
 ```
 
 #### Usage
-The `ridengui` command is used to start the GUI.  
-A desktop entry and icon are available in the `data` directory.  
-After very first execution, you will have to specify serial port, apply change and restart application.  
-After that you could set GUI V/I limits and change steps. This is, for exampe, handy for safety if you work with low voltage electronics.  
-These settings are not the same as OCP and OVP on device itself, they are just limits in this RidenGUI.  
-All these settings are preserved between RidenGUI restarts.
+There's icon and desktop entry files in the `data` directory.  
+Run the command `ridengui` to start the GUI.
 
-#### Compatibility
-Compatible with models RD6006, RD6006P, RD6012, and RD6018.
-Pull requests for other models are welcome.
-
-#### Screenshots thumbnail. Full scale ones are in screenshots folder.
-![](screenshots/thumbnails.png)
+[Discussions]: https://github.com/ShayBox/RidenGUI/discussions
+[Python]: https://python.org

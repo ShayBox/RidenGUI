@@ -1,180 +1,295 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Settings</class>
- <widget class="QDialog" name="Settings">
+ <class>SettingsWizard</class>
+ <widget class="QWizard" name="SettingsWizard">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>312</width>
-    <height>288</height>
+    <width>306</width>
+    <height>606</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>General</string>
+   <string>Settings Wizard</string>
   </property>
   <property name="windowIcon">
    <iconset theme="riden">
     <normaloff>.</normaloff>.</iconset>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="2" colspan="2">
-    <widget class="QSlider" name="backlight_slider">
-     <property name="maximum">
-      <number>5</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2" colspan="2">
-    <widget class="QComboBox" name="language_box">
-     <item>
-      <property name="text">
-       <string>English</string>
+  <property name="options">
+   <set>QWizard::NoBackButtonOnStartPage</set>
+  </property>
+  <widget class="QWizardPage" name="wizardPage1">
+   <property name="title">
+    <string>Serial</string>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">0</string>
+   </attribute>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="portLabel">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
       </property>
-     </item>
-     <item>
       <property name="text">
-       <string>Chinese</string>
+       <string>Serial Port</string>
       </property>
-     </item>
-     <item>
+      <property name="buddy">
+       <cstring>portLine</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="portLine">
       <property name="text">
-       <string>Deutsch</string>
+       <string>/dev/ttyUSB0</string>
       </property>
-     </item>
-     <item>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="baudrateLabel">
       <property name="text">
-       <string>Français</string>
+       <string>Baudrate</string>
       </property>
-     </item>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLabel" name="backlight_label">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Backlight</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLabel" name="language_label">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Language</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1" colspan="3">
-    <layout class="QGridLayout" name="settings_layout">
-     <item row="1" column="0">
-      <widget class="QCheckBox" name="confirm_box">
+      <property name="buddy">
+       <cstring>baudrateCombo</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QComboBox" name="baudrateCombo">
+      <property name="currentIndex">
+       <number>4</number>
+      </property>
+      <item>
        <property name="text">
-        <string>Confirm memory state change</string>
+        <string>9600</string>
        </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QCheckBox" name="logo_box">
+      </item>
+      <item>
        <property name="text">
-        <string>Enable Boot Logo</string>
+        <string>19200</string>
        </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QCheckBox" name="restore_box">
+      </item>
+      <item>
        <property name="text">
-        <string>Restore state on boot</string>
+        <string>38400</string>
        </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QCheckBox" name="power_box">
+      </item>
+      <item>
        <property name="text">
-        <string>Power-on after power-loss</string>
+        <string>57600</string>
        </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QCheckBox" name="buzzer_box">
+      </item>
+      <item>
        <property name="text">
-        <string>Enable Buzzer</string>
+        <string>115200</string>
        </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="6" column="1">
-    <widget class="QPushButton" name="time_button">
-     <property name="text">
-      <string>Sync Time</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="2">
-    <widget class="QDialogButtonBox" name="buttons">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-  </layout>
+      </item>
+      <item>
+       <property name="text">
+        <string>230400</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>250000</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>460800</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>921600</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>1000000</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="addressLabel">
+      <property name="text">
+       <string>Address</string>
+      </property>
+      <property name="buddy">
+       <cstring>addressSpin</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QSpinBox" name="addressSpin">
+      <property name="maximum">
+       <number>255</number>
+      </property>
+      <property name="value">
+       <number>1</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWizardPage" name="wizardPage2">
+   <property name="title">
+    <string>RidenGUI</string>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">1</string>
+   </attribute>
+   <layout class="QFormLayout" name="formLayout_2">
+    <item row="0" column="0">
+     <widget class="QLabel" name="pollingLabel">
+      <property name="text">
+       <string>Polling Speed (ms)</string>
+      </property>
+      <property name="buddy">
+       <cstring>pollingSpin</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QSpinBox" name="pollingSpin">
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>10000</number>
+      </property>
+      <property name="value">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="colorsLabel">
+      <property name="text">
+       <string>Custom Colors</string>
+      </property>
+      <property name="buddy">
+       <cstring>inputVoltagePush</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="inputVoltagePush">
+      <property name="styleSheet">
+       <string notr="true">color: #ff00ff</string>
+      </property>
+      <property name="text">
+       <string>Input Voltage</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QPushButton" name="outputVoltagePush">
+      <property name="styleSheet">
+       <string notr="true">color: #ffff00</string>
+      </property>
+      <property name="text">
+       <string>Output Voltage</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QPushButton" name="outputCurrentPush">
+      <property name="styleSheet">
+       <string notr="true">color: #00ffff</string>
+      </property>
+      <property name="text">
+       <string>Output Current</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QPushButton" name="outputPowerPush">
+      <property name="styleSheet">
+       <string notr="true">color: #ff00ff</string>
+      </property>
+      <property name="text">
+       <string>Output Power</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QPushButton" name="outputOnPush">
+      <property name="styleSheet">
+       <string notr="true">color: #00ff00</string>
+      </property>
+      <property name="text">
+       <string>Output ON</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QPushButton" name="outputOffPush">
+      <property name="styleSheet">
+       <string notr="true">color: #808080</string>
+      </property>
+      <property name="text">
+       <string>Output OFF</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QPushButton" name="outputFaultPush">
+      <property name="styleSheet">
+       <string notr="true">color: #ff0000</string>
+      </property>
+      <property name="text">
+       <string>Output Fault</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QPushButton" name="voltageSetPush">
+      <property name="styleSheet">
+       <string notr="true">color: #ffff00</string>
+      </property>
+      <property name="text">
+       <string>Voltage Set</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QPushButton" name="currentSetPush">
+      <property name="styleSheet">
+       <string notr="true">color: #ffff00</string>
+      </property>
+      <property name="text">
+       <string>Current Set</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
+ <tabstops>
+  <tabstop>portLine</tabstop>
+  <tabstop>baudrateCombo</tabstop>
+  <tabstop>addressSpin</tabstop>
+  <tabstop>pollingSpin</tabstop>
+  <tabstop>inputVoltagePush</tabstop>
+  <tabstop>outputVoltagePush</tabstop>
+  <tabstop>outputCurrentPush</tabstop>
+  <tabstop>outputPowerPush</tabstop>
+  <tabstop>outputOnPush</tabstop>
+  <tabstop>outputOffPush</tabstop>
+  <tabstop>outputFaultPush</tabstop>
+  <tabstop>voltageSetPush</tabstop>
+  <tabstop>currentSetPush</tabstop>
+ </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttons</sender>
-   <signal>accepted()</signal>
-   <receiver>Settings</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttons</sender>
-   <signal>rejected()</signal>
-   <receiver>Settings</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

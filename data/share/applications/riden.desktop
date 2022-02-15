@@ -2,7 +2,7 @@
 Type=Application
 Encoding=UTF-8
 Name=Riden GUI
-Comment=Riden Qt GUI using PySide2
+Comment=Qt 5/6 based GUI for Riden RDXX power supplies written in Python
 Exec=env KDE_NO_GLOBAL_MENU=1 ridengui
 Icon=riden.png
 Terminal=false
