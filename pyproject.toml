@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "RidenGUI"
-version = "1.0.0"
+version = "1.0.1"
 description = "Qt 5/6 based GUI for Riden RDXX power supplies written in Python"
 authors = ["Shayne Hartford <shaybox@shaybox.com>"]
 

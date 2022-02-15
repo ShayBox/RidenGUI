@@ -51,15 +51,15 @@ class MainWindow(QMainWindow):
 
         # Create Riden object
         self.r = Riden(
-            port=self.settings.value("port", "/dev/ttyUSB0"),
-            baudrate=int(self.settings.value("baudrate", 115200)),
-            address=int(self.settings.value("address", 1)),
+            port=self.settings.value("serial/port", "/dev/ttyUSB0"),
+            baudrate=int(self.settings.value("serial/baudrate", 115200)),
+            address=int(self.settings.value("serial/address", 1)),
         )
 
         # Define stylesheet variables
-        self.output_on = self.settings.value("output-on-style")
-        self.output_off = self.settings.value("output-off-style")
-        self.output_fault = self.settings.value("output-fault-style")
+        self.output_on = self.settings.value("style/output-on")
+        self.output_off = self.settings.value("style/output-off")
+        self.output_fault = self.settings.value("style/output-fault")
 
         # Precition output formats
         # Display formats on real devices
@@ -94,10 +94,10 @@ class MainWindow(QMainWindow):
             self.default_current_max = 24.1
 
         # Define voltage/current/power format string variables
-        self.voltage_input_format = self.settings.value("voltage-input-format", self.default_voltage_input_format)
-        self.voltage_output_format = self.settings.value("voltage-output-format", self.default_voltage_output_format)
-        self.current_output_format = self.settings.value("current-output-format", self.default_current_output_format)
-        self.power_output_format = self.settings.value("power-output-format", self.default_power_output_format)
+        self.voltage_input_format = self.settings.value("format/voltage-input", self.default_voltage_input_format)
+        self.voltage_output_format = self.settings.value("format/voltage-output", self.default_voltage_output_format)
+        self.current_output_format = self.settings.value("format/current-output", self.default_current_output_format)
+        self.power_output_format = self.settings.value("format/power-output", self.default_power_output_format)
 
         # Define prev_v_set and prev_i_set variables
         self.prev_v_set = self.r.v_set
@@ -154,10 +154,10 @@ class MainWindow(QMainWindow):
         self.ui.currentMaxDoubleSpin.valueChanged.connect(self.ui.currentDoubleSpin.setMaximum)
 
         # Load voltage/current min/max values for DoubleSpinBoxes
-        self.ui.voltageMinDoubleSpin.setValue(int(self.settings.value("voltage-min", 0)) / 1000)
-        self.ui.voltageMaxDoubleSpin.setValue(int(self.settings.value("voltage-max", self.default_voltage_max)) / 1000)
-        self.ui.currentMinDoubleSpin.setValue(int(self.settings.value("current-min", 0)) / 1000)
-        self.ui.currentMaxDoubleSpin.setValue(int(self.settings.value("current-max", self.default_current_max)) / 1000)
+        self.ui.voltageMinDoubleSpin.setValue(int(self.settings.value("limits/voltage-min", 0)) / 1000)
+        self.ui.voltageMaxDoubleSpin.setValue(int(self.settings.value("limits/voltage-max", self.default_voltage_max)) / 1000)
+        self.ui.currentMinDoubleSpin.setValue(int(self.settings.value("limits/current-min", 0)) / 1000)
+        self.ui.currentMaxDoubleSpin.setValue(int(self.settings.value("limits/current-max", self.default_current_max)) / 1000)
 
         # Connect voltage/current DoubleSpinBoxes to Dials
         self.ui.voltageDoubleSpin.valueChanged.connect(self.ui.voltageDial.setValue)
@@ -172,10 +172,10 @@ class MainWindow(QMainWindow):
         self.ui.currentDoubleSpin.setValue(self.r.i_set)
 
         # Connect voltage/current min/max DoubleSpinBoxes to settings
-        self.ui.voltageMinDoubleSpin.valueChanged.connect(lambda v: self.settings.setValue("voltage-min", v * 1000))
-        self.ui.voltageMaxDoubleSpin.valueChanged.connect(lambda v: self.settings.setValue("voltage-max", v * 1000))
-        self.ui.currentMinDoubleSpin.valueChanged.connect(lambda i: self.settings.setValue("current-min", i * 1000))
-        self.ui.currentMaxDoubleSpin.valueChanged.connect(lambda i: self.settings.setValue("current-max", i * 1000))
+        self.ui.voltageMinDoubleSpin.valueChanged.connect(lambda v: self.settings.setValue("limits/voltage-min", v * 1000))
+        self.ui.voltageMaxDoubleSpin.valueChanged.connect(lambda v: self.settings.setValue("limits/voltage-max", v * 1000))
+        self.ui.currentMinDoubleSpin.valueChanged.connect(lambda i: self.settings.setValue("limits/current-min", i * 1000))
+        self.ui.currentMaxDoubleSpin.valueChanged.connect(lambda i: self.settings.setValue("limits/current-max", i * 1000))
 
         # Connect voltage/current step to DoubleSpinBoxes
         def voltageStep(step: str):
@@ -196,12 +196,12 @@ class MainWindow(QMainWindow):
         self.ui.currentStepCombo.currentTextChanged.connect(lambda s: currentStep(s))
 
         # Load voltage/current step values for ComboBoxes
-        self.ui.voltageStepCombo.setCurrentText(self.settings.value("voltage-step", "0.01"))
-        self.ui.currentStepCombo.setCurrentText(self.settings.value("current-step", "0.01"))
+        self.ui.voltageStepCombo.setCurrentText(self.settings.value("limits/voltage-step", "0.01"))
+        self.ui.currentStepCombo.setCurrentText(self.settings.value("limits/current-step", "0.01"))
 
         # Connect voltage/current step to settings
-        self.ui.voltageStepCombo.currentTextChanged.connect(lambda s: self.settings.setValue("voltage-step", s))
-        self.ui.currentStepCombo.currentTextChanged.connect(lambda s: self.settings.setValue("current-step", s))
+        self.ui.voltageStepCombo.currentTextChanged.connect(lambda s: self.settings.setValue("limits/voltage-step", s))
+        self.ui.currentStepCombo.currentTextChanged.connect(lambda s: self.settings.setValue("limits/current-step", s))
 
         # Connect output button to riden
         self.ui.outputPush.clicked.connect(lambda: self.r.set_output(not self.r.output))

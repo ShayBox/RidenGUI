@@ -24,8 +24,11 @@
    <property name="title">
     <string>Serial</string>
    </property>
+   <property name="subTitle">
+    <string>Serial communication</string>
+   </property>
    <attribute name="pageId">
-    <string notr="true">0</string>
+    <string notr="true">1</string>
    </attribute>
    <layout class="QFormLayout" name="formLayout">
     <item row="0" column="0">
@@ -139,27 +142,14 @@
       </property>
      </widget>
     </item>
-   </layout>
-  </widget>
-  <widget class="QWizardPage" name="wizardPage2">
-   <property name="title">
-    <string>RidenGUI</string>
-   </property>
-   <attribute name="pageId">
-    <string notr="true">1</string>
-   </attribute>
-   <layout class="QFormLayout" name="formLayout_2">
-    <item row="0" column="0">
+    <item row="3" column="0">
      <widget class="QLabel" name="pollingLabel">
       <property name="text">
-       <string>Polling Speed (ms)</string>
-      </property>
-      <property name="buddy">
-       <cstring>pollingSpin</cstring>
+       <string>Polling (ms)</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
+    <item row="3" column="1">
      <widget class="QSpinBox" name="pollingSpin">
       <property name="minimum">
        <number>1</number>
@@ -168,11 +158,24 @@
        <number>10000</number>
       </property>
       <property name="value">
-       <number>100</number>
+       <number>500</number>
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
+   </layout>
+  </widget>
+  <widget class="QWizardPage" name="wizardPage2">
+   <property name="title">
+    <string>Style</string>
+   </property>
+   <property name="subTitle">
+    <string>CSS stylesheet</string>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">2</string>
+   </attribute>
+   <layout class="QFormLayout" name="formLayout_2">
+    <item row="0" column="0">
      <widget class="QLabel" name="colorsLabel">
       <property name="text">
        <string>Custom Colors</string>
@@ -182,7 +185,7 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
+    <item row="0" column="1">
      <widget class="QPushButton" name="inputVoltagePush">
       <property name="styleSheet">
        <string notr="true">color: #ff00ff</string>
@@ -192,7 +195,7 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
+    <item row="1" column="1">
      <widget class="QPushButton" name="outputVoltagePush">
       <property name="styleSheet">
        <string notr="true">color: #ffff00</string>
@@ -202,7 +205,7 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
+    <item row="2" column="1">
      <widget class="QPushButton" name="outputCurrentPush">
       <property name="styleSheet">
        <string notr="true">color: #00ffff</string>
@@ -212,7 +215,7 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="1">
+    <item row="3" column="1">
      <widget class="QPushButton" name="outputPowerPush">
       <property name="styleSheet">
        <string notr="true">color: #ff00ff</string>
@@ -222,7 +225,7 @@
       </property>
      </widget>
     </item>
-    <item row="5" column="1">
+    <item row="4" column="1">
      <widget class="QPushButton" name="outputOnPush">
       <property name="styleSheet">
        <string notr="true">color: #00ff00</string>
@@ -232,7 +235,7 @@
       </property>
      </widget>
     </item>
-    <item row="6" column="1">
+    <item row="5" column="1">
      <widget class="QPushButton" name="outputOffPush">
       <property name="styleSheet">
        <string notr="true">color: #808080</string>
@@ -242,7 +245,7 @@
       </property>
      </widget>
     </item>
-    <item row="7" column="1">
+    <item row="6" column="1">
      <widget class="QPushButton" name="outputFaultPush">
       <property name="styleSheet">
        <string notr="true">color: #ff0000</string>
@@ -252,7 +255,7 @@
       </property>
      </widget>
     </item>
-    <item row="8" column="1">
+    <item row="7" column="1">
      <widget class="QPushButton" name="voltageSetPush">
       <property name="styleSheet">
        <string notr="true">color: #ffff00</string>
@@ -262,7 +265,7 @@
       </property>
      </widget>
     </item>
-    <item row="9" column="1">
+    <item row="8" column="1">
      <widget class="QPushButton" name="currentSetPush">
       <property name="styleSheet">
        <string notr="true">color: #ffff00</string>
@@ -274,12 +277,78 @@
     </item>
    </layout>
   </widget>
+  <widget class="QWizardPage" name="wizardPage3">
+   <property name="title">
+    <string>Format</string>
+   </property>
+   <property name="subTitle">
+    <string>Python format strings</string>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">3</string>
+   </attribute>
+   <layout class="QFormLayout" name="formLayout_3">
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="inputVoltageLine">
+      <property name="text">
+       <string>%05.2f</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="outputVoltageLine">
+      <property name="text">
+       <string>%05.2f</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="inputVoltageLabel">
+      <property name="text">
+       <string>Voltage In</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="outputVoltageLabel">
+      <property name="text">
+       <string>Voltage Out</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="outputCurrentLabel">
+      <property name="text">
+       <string>Current Out</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="outputCurrentLine">
+      <property name="text">
+       <string>%05.2f</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="outputPowerLabel">
+      <property name="text">
+       <string>Power Out</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="outputPowerLine">
+      <property name="text">
+       <string>%6.2f</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>portLine</tabstop>
-  <tabstop>baudrateCombo</tabstop>
-  <tabstop>addressSpin</tabstop>
-  <tabstop>pollingSpin</tabstop>
   <tabstop>inputVoltagePush</tabstop>
   <tabstop>outputVoltagePush</tabstop>
   <tabstop>outputCurrentPush</tabstop>
