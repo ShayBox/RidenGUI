@@ -7,16 +7,37 @@
     <x>0</x>
     <y>0</y>
     <width>173</width>
-    <height>131</height>
+    <height>156</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>About</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="riden"/>
+   <iconset theme="riden">
+    <normaloff>.</normaloff>.</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="4" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="sourceLabel">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/ShayBox/RidenGUI&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;RidenGUI Source Code &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
    <item row="2" column="0">
     <spacer name="verticalSpacer">
      <property name="orientation">
@@ -46,19 +67,9 @@
     </widget>
    </item>
    <item row="3" column="0">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="descriptionLabel">
+    <widget class="QLabel" name="firmwareLabel">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/ShayBox/RidenGUI&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;RidenGUI Source Code &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://eevblog.com/forum/testgear/ruideng-riden-rd6006-dc-power-supply&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Custom Firmware&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

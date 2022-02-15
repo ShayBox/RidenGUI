@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "RidenGUI"
-version = "1.0.1"
+version = "1.0.2"
 description = "Qt 5/6 based GUI for Riden RDXX power supplies written in Python"
 authors = ["Shayne Hartford <shaybox@shaybox.com>"]
 
 [tool.poetry.dependencies]
+click = "^8.0.3"
 PySide2 = { version = "^5.15.2", optional = true }
 PySide6 = { version = "^6.2.3", optional = true }
 python = ">=3.7,<3.11"
