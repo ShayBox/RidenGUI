@@ -40,15 +40,18 @@ class SettingsWizard(QWizard):
         self.ui.baudrateCombo.setCurrentText(self.settings.value("serial/baudrate", "115200"))
         self.ui.addressSpin.setValue(int(self.settings.value("serial/address", 1)))
         self.ui.pollingSpin.setValue(int(self.settings.value("polling", 500)))
-        self.ui.inputVoltagePush.setStyleSheet(self.settings.value("style/input-voltage", "color:#00ff00"))
-        self.ui.outputVoltagePush.setStyleSheet(self.settings.value("style/output-voltage", "color:#ffff00"))
-        self.ui.outputCurrentPush.setStyleSheet(self.settings.value("style/output-current", "color:#ffff00"))
-        self.ui.outputPowerPush.setStyleSheet(self.settings.value("style/output-power", "color:#00ffff"))
-        self.ui.outputOnPush.setStyleSheet(self.settings.value("style/output-on", "background-color:#00ff00;color:#000000"))
-        self.ui.outputOffPush.setStyleSheet(self.settings.value("style/output-off", "background-color:#808080;color:#000000"))
-        self.ui.outputFaultPush.setStyleSheet(self.settings.value("style/output-fault", "background-color:#ff0000;color:#000000"))
-        self.ui.voltageSetPush.setStyleSheet(self.settings.value("style/voltage-set", "color:#ffff00"))
-        self.ui.currentSetPush.setStyleSheet(self.settings.value("style/current-set", "color:#ffff00"))
+        self.ui.inputVoltagePush.setStyleSheet(self.settings.value("style/input-voltage", self.ui.inputVoltagePush.styleSheet()))
+        self.ui.outputVoltagePush.setStyleSheet(self.settings.value("style/output-voltage", self.ui.outputVoltagePush.styleSheet()))
+        self.ui.outputCurrentPush.setStyleSheet(self.settings.value("style/output-current", self.ui.outputCurrentPush.styleSheet()))
+        self.ui.outputPowerPush.setStyleSheet(self.settings.value("style/output-power", self.ui.outputPowerPush.styleSheet()))
+        self.ui.voltageSetPush.setStyleSheet(self.settings.value("style/voltage-set", self.ui.voltageSetPush.styleSheet()))
+        self.ui.currentSetPush.setStyleSheet(self.settings.value("style/current-set", self.ui.currentSetPush.styleSheet()))
+        self.ui.outputOnTextPush.setStyleSheet(self.settings.value("style/output-on-text", self.ui.outputOnTextPush.styleSheet()))
+        self.ui.outputOffTextPush.setStyleSheet(self.settings.value("style/output-off-text", self.ui.outputOffTextPush.styleSheet()))
+        self.ui.outputFaultTextPush.setStyleSheet(self.settings.value("style/output-fault-text", self.ui.outputFaultTextPush.styleSheet()))
+        self.ui.outputOnButtonPush.setStyleSheet(self.settings.value("style/output-on-bg", self.ui.outputOnButtonPush.styleSheet()))
+        self.ui.outputOffButtonPush.setStyleSheet(self.settings.value("style/output-off-bg", self.ui.outputOffButtonPush.styleSheet()))
+        self.ui.outputFaultButtonPush.setStyleSheet(self.settings.value("style/output-fault-bg", self.ui.outputFaultButtonPush.styleSheet()))
         self.ui.inputVoltageLine.setText(self.settings.value("format/voltage-input", self.parent.default_voltage_input_format))
         self.ui.outputVoltageLine.setText(self.settings.value("format/voltage-output", self.parent.default_voltage_output_format))
         self.ui.outputCurrentLine.setText(self.settings.value("format/current-output", self.parent.default_current_output_format))
@@ -59,24 +62,25 @@ class SettingsWizard(QWizard):
             self.ui.outputVoltagePush,
             self.ui.outputCurrentPush,
             self.ui.outputPowerPush,
-            self.ui.outputOnPush,
-            self.ui.outputOffPush,
-            self.ui.outputFaultPush,
             self.ui.voltageSetPush,
             self.ui.currentSetPush,
+            self.ui.outputOnTextPush,
+            self.ui.outputOffTextPush,
+            self.ui.outputFaultTextPush,
+            self.ui.outputOnButtonPush,
+            self.ui.outputOffButtonPush,
+            self.ui.outputFaultButtonPush,
         ):
             button.clicked.connect(self.button_clicked)
 
     def button_clicked(self):
-        # Get current style
-        style = self.sender().styleSheet()
-
-        # Create color dialog
-        color = QColorDialog.getColor(QColor(style.split("#")[1]), self)
-
-        # Set style
-        if color.isValid():
-            self.sender().setStyleSheet("color:%s" % color.name())
+        sender = self.sender()
+        stylesheet: str = sender.styleSheet()
+        old_color = stylesheet.split(";")[-1].split(":")[1]
+        new_color = QColor(old_color.replace("#", ""))
+        new_color = QColorDialog.getColor(new_color, self)
+        if new_color.isValid():
+            sender.setStyleSheet(stylesheet.replace(old_color, new_color.name()))
 
     def accept(self):
         # Save settings
@@ -88,11 +92,14 @@ class SettingsWizard(QWizard):
         self.settings.setValue("style/output-voltage", self.ui.outputVoltagePush.styleSheet())
         self.settings.setValue("style/output-current", self.ui.outputCurrentPush.styleSheet())
         self.settings.setValue("style/output-power", self.ui.outputPowerPush.styleSheet())
-        self.settings.setValue("style/output-on", self.ui.outputOnPush.styleSheet())
-        self.settings.setValue("style/output-off", self.ui.outputOffPush.styleSheet())
-        self.settings.setValue("style/output-fault", self.ui.outputFaultPush.styleSheet())
         self.settings.setValue("style/voltage-set", self.ui.voltageSetPush.styleSheet())
         self.settings.setValue("style/current-set", self.ui.currentSetPush.styleSheet())
+        self.settings.setValue("style/output-on-text", self.ui.outputOnTextPush.styleSheet())
+        self.settings.setValue("style/output-off-text", self.ui.outputOffTextPush.styleSheet())
+        self.settings.setValue("style/output-fault-text", self.ui.outputFaultTextPush.styleSheet())
+        self.settings.setValue("style/output-on-bg", self.ui.outputOnButtonPush.styleSheet())
+        self.settings.setValue("style/output-off-bg", self.ui.outputOffButtonPush.styleSheet())
+        self.settings.setValue("style/output-fault-bg", self.ui.outputFaultButtonPush.styleSheet())
         self.settings.setValue("format/voltage-input", self.ui.inputVoltageLine.text())
         self.settings.setValue("format/voltage-output", self.ui.outputVoltageLine.text())
         self.settings.setValue("format/current-output", self.ui.outputCurrentLine.text())

@@ -6,6 +6,7 @@ Qt 5/6 based GUI for Riden RDXX power supplies written in Python
 ![MainWindow](screenshots/mainwindow.png)  
 ![SettingsWizard1](screenshots/settingswizard1.png)
 ![SettingsWizard2](screenshots/settingswizard2.png)
+![SettingsWizard2](screenshots/settingswizard3.png)  
 
 #### Issues
 Please report and discuss issues on [Discussions]
@@ -27,6 +28,7 @@ $ poetry add git+https://github.com/shaybox/ridengui.git
 #### Usage
 There's icon and desktop entry files in the `data` directory.  
 Run the command `ridengui` to start the GUI.
+Run the command `ridengui --help` to see the command line options.
 
 [Discussions]: https://github.com/ShayBox/RidenGUI/discussions
 [Python]: https://python.org

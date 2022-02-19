@@ -26,16 +26,13 @@ class MainWindow(QMainWindow):
     def __init__(self, port: str = None, baudrate: int = None, address: int = None):
         super().__init__()
 
+        #
+        # Main window UI
+        #
+
         logging.debug("Initializing MainWindow from mainwindow.ui")
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
-        logging.debug("Initializing QSettings")
-        self.settings = QSettings("ShayBox", "RidenGUI")
-
-        if self.settings.value("first-run", 1) == 1:
-            logging.debug("First run detected, showing settings wizard")
-            SettingsWizard(self.settings, self).exec()
 
         logging.debug("Configuring fixed font for labels")
         font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
@@ -50,17 +47,9 @@ class MainWindow(QMainWindow):
         self.adjustSize()
         self.resize(self.minimumSize())
 
-        logging.debug("Initializing Riden library")
-        self.r = Riden(
-            port=port or self.settings.value("serial/port", "/dev/ttyUSB0"),
-            baudrate=baudrate or int(self.settings.value("serial/baudrate", 115200)),
-            address=address or int(self.settings.value("serial/address", 1)),
-        )
-
-        logging.debug("Loading custom stylesheets from settings")
-        self.output_on = self.settings.value("style/output-on")
-        self.output_off = self.settings.value("style/output-off")
-        self.output_fault = self.settings.value("style/output-fault")
+        #
+        # Default value definitions
+        #
 
         # Precition output formats
         # Display formats on real devices
@@ -70,7 +59,7 @@ class MainWindow(QMainWindow):
         # RD6012    00.00  00.00   00.00    000.0
         # RD6018    00.00  00.00   00.00    000.0
 
-        logging.debug("Defining default format string settings for device type")
+        logging.debug("Defining default value definitions")
         self.default_voltage_input_format = "%05.2f"
         self.default_voltage_output_format = "%05.2f"
         self.default_current_output_format = "%05.2f"
@@ -78,6 +67,49 @@ class MainWindow(QMainWindow):
         self.default_voltage_max = 61.0
         self.default_current_max = 0.0
 
+        #
+        # QSettings & Setting variables
+        #
+
+        logging.debug("Initializing QSettings")
+        self.settings = QSettings("ShayBox", "RidenGUI")
+
+        if self.settings.value("first-run", 1) == 1:
+            logging.debug("First run detected, showing settings wizard")
+            SettingsWizard(self.settings, self).exec()
+            exit(0)
+
+        logging.debug("Loading custom format strings from settings")
+        self.voltage_input_format = self.settings.value("format/voltage-input", self.default_voltage_input_format)
+        self.voltage_output_format = self.settings.value("format/voltage-output", self.default_voltage_output_format)
+        self.current_output_format = self.settings.value("format/current-output", self.default_current_output_format)
+        self.power_output_format = self.settings.value("format/power-output", self.default_power_output_format)
+
+        logging.debug("Loading custom stylesheets from settings")
+        self.output_on = self.settings.value("style/output-on-bg") + self.settings.value("style/output-on-text")
+        self.output_off = self.settings.value("style/output-off-bg") + self.settings.value("style/output-off-text")
+        self.output_fault = self.settings.value("style/output-fault-bg") + self.settings.value("style/output-fault-text")
+
+        #
+        # Riden
+        #
+
+        logging.debug("Initializing Riden library")
+        self.r = Riden(
+            port=port or self.settings.value("serial/port", "/dev/ttyUSB0"),
+            baudrate=baudrate or int(self.settings.value("serial/baudrate", 115200)),
+            address=address or int(self.settings.value("serial/address", 1)),
+        )
+
+        logging.debug("Defining temporary variables for live feedback")
+        self.prev_v_set = self.r.v_set
+        self.prev_i_set = self.r.i_set
+
+        #
+        # Dynamic value definitions
+        #
+
+        logging.debug("Defining dynamic value definitions")
         if self.r.type == "RD6012":
             self.default_voltage_output_format = "%05.3f"
             self.default_current_output_format = "%05.4f"
@@ -93,15 +125,9 @@ class MainWindow(QMainWindow):
         elif self.r.type == "RD6024":
             self.default_current_max = 24.1
 
-        logging.debug("Loading custom format strings from settings")
-        self.voltage_input_format = self.settings.value("format/voltage-input", self.default_voltage_input_format)
-        self.voltage_output_format = self.settings.value("format/voltage-output", self.default_voltage_output_format)
-        self.current_output_format = self.settings.value("format/current-output", self.default_current_output_format)
-        self.power_output_format = self.settings.value("format/power-output", self.default_power_output_format)
-
-        logging.debug("Defining temporary variables for live feedback")
-        self.prev_v_set = self.r.v_set
-        self.prev_i_set = self.r.i_set
+        #
+        # Qt Slots, Signals, and Messages
+        #
 
         logging.debug("Connecting signals and slots")
         self.connect_signals()
@@ -117,6 +143,10 @@ class MainWindow(QMainWindow):
                 self.r.sn,
             )
         )
+
+        #
+        # Background worker
+        #
 
         logging.debug("Starting worker thread")
         self.worker = Worker(self.r, self.settings, self)
@@ -155,9 +185,9 @@ class MainWindow(QMainWindow):
 
         logging.debug("Loading voltage/current min/max values from settings")
         self.ui.voltageMinDoubleSpin.setValue(int(self.settings.value("limits/voltage-min", 0)) / 1000)
-        self.ui.voltageMaxDoubleSpin.setValue(int(self.settings.value("limits/voltage-max", self.default_voltage_max)) / 1000)
+        self.ui.voltageMaxDoubleSpin.setValue(int(self.settings.value("limits/voltage-max", self.default_voltage_max * 1000)) / 1000)
         self.ui.currentMinDoubleSpin.setValue(int(self.settings.value("limits/current-min", 0)) / 1000)
-        self.ui.currentMaxDoubleSpin.setValue(int(self.settings.value("limits/current-max", self.default_current_max)) / 1000)
+        self.ui.currentMaxDoubleSpin.setValue(int(self.settings.value("limits/current-max", self.default_current_max * 1000)) / 1000)
 
         logging.debug("Connecting voltage/current DoubleSpinBoxes to Dials")
         self.ui.voltageDoubleSpin.valueChanged.connect(self.ui.voltageDial.setValue)
@@ -167,7 +197,7 @@ class MainWindow(QMainWindow):
         self.ui.voltageDial.valueChanged.connect(self.ui.voltageDoubleSpin.setValue)
         self.ui.currentDial.valueChanged.connect(self.ui.currentDoubleSpin.setValue)
 
-        logging.debug("Loading voltage/current values from settings")
+        logging.debug("Loading voltage/current values from riden")
         self.ui.voltageDoubleSpin.setValue(self.r.v_set)
         self.ui.currentDoubleSpin.setValue(self.r.i_set)
 
