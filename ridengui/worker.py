@@ -1,13 +1,5 @@
-# Built-in modules
-import sys
-
 # Third-party modules
-if "PySide2" in sys.modules:
-    from PySide2.QtCore import QSettings, QThread, Signal
-elif "PySide6" in sys.modules:
-    from PySide6.QtCore import QSettings, QThread, Signal
-else:
-    raise ModuleNotFoundError("PySide2 or PySide6 is required to run this program.")
+from qtpy.QtCore import QSettings, QThread, Signal
 
 # Local modules
 from riden import Riden

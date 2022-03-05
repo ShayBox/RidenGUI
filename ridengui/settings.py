@@ -1,21 +1,13 @@
 # Built-in modules
 import sys
+from os.path import dirname
 from subprocess import Popen
 
 # Third-party modules
-if "PySide2" in sys.modules:
-    from PySide2.QtCore import QSettings
-    from PySide2.QtGui import QColor
-    from PySide2.QtWidgets import QApplication, QColorDialog, QWizard
-elif "PySide6" in sys.modules:
-    from PySide6.QtCore import QSettings
-    from PySide6.QtGui import QColor
-    from PySide6.QtWidgets import QApplication, QColorDialog, QWizard
-else:
-    raise ModuleNotFoundError("PySide2 or PySide6 is required to run this program.")
-
-# Local modules
-from ridengui.ui.settings import Ui_SettingsWizard
+from qtpy.QtCore import QSettings
+from qtpy.QtGui import QColor
+from qtpy.QtWidgets import QApplication, QColorDialog, QWizard
+from qtpy.uic import loadUi
 
 
 class SettingsWizard(QWizard):
@@ -25,8 +17,7 @@ class SettingsWizard(QWizard):
         self.parent = parent
 
         # Load wizard.ui
-        self.ui = Ui_SettingsWizard()
-        self.ui.setupUi(self)
+        self.ui = loadUi(dirname(__file__) + "/settings.ui", self)
 
         # Adjust widget sizes and resize window
         self.adjustSize()

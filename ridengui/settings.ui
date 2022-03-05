@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>306</width>
-    <height>564</height>
+    <height>307</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -386,6 +386,25 @@
  </widget>
  <tabstops>
   <tabstop>portLine</tabstop>
+  <tabstop>baudrateCombo</tabstop>
+  <tabstop>addressSpin</tabstop>
+  <tabstop>pollingSpin</tabstop>
+  <tabstop>inputVoltageLine</tabstop>
+  <tabstop>outputVoltageLine</tabstop>
+  <tabstop>outputCurrentLine</tabstop>
+  <tabstop>outputPowerLine</tabstop>
+  <tabstop>inputVoltagePush</tabstop>
+  <tabstop>outputVoltagePush</tabstop>
+  <tabstop>outputCurrentPush</tabstop>
+  <tabstop>outputPowerPush</tabstop>
+  <tabstop>voltageSetPush</tabstop>
+  <tabstop>currentSetPush</tabstop>
+  <tabstop>outputOnTextPush</tabstop>
+  <tabstop>outputOffTextPush</tabstop>
+  <tabstop>outputFaultTextPush</tabstop>
+  <tabstop>outputOnButtonPush</tabstop>
+  <tabstop>outputOffButtonPush</tabstop>
+  <tabstop>outputFaultButtonPush</tabstop>
  </tabstops>
  <resources/>
  <connections/>

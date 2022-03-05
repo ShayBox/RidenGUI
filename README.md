@@ -14,21 +14,32 @@ Please report and discuss issues on [Discussions]
 #### Installation
 Requirements:
 - [Python] 3.7 or later
-- PySide2 (Qt5) or PySide6 (Qt6)
+- [Poetry] via pip
+- [PyQt5] or [PyQt6]
 ```
-$ pip install --user pyside2
+$ pip install --user pyqt5
 $ pip install --user git+https://github.com/shaybox/ridengui.git
+
+$ ridengui
 ```
 
-Adding to an existing poetry project:
+### Development
+`poetry` is a required build dependency (build tool)
 ```
-$ poetry add git+https://github.com/shaybox/ridengui.git
+git clone https://github.com/ShayBox/RidenGUI.git
+cd RidenGUI
+poetry env use <python3 executable>
+
+$ poetry run ridengui
 ```
 
 #### Usage
 There's icon and desktop entry files in the `data` directory.  
-Run the command `ridengui` to start the GUI.
+Run the command `ridengui` to start the GUI.  
 Run the command `ridengui --help` to see the command line options.
 
 [Discussions]: https://github.com/ShayBox/RidenGUI/discussions
 [Python]: https://python.org
+[Poetry]: https://python-poetry.org
+[PyQt5]: https://pypi.org/project/PyQt5
+[PyQt6]: https://pypi.org/project/PyQt6

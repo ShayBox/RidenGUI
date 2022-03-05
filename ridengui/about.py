@@ -1,21 +1,13 @@
 # Built-in modules
-import sys
+from os.path import dirname
 
 # Third-party modules
-if "PySide2" in sys.modules:
-    from PySide2.QtWidgets import QDialog
-elif "PySide6" in sys.modules:
-    from PySide6.QtWidgets import QDialog
-else:
-    raise ModuleNotFoundError("PySide2 or PySide6 is required to run this program.")
-
-# Local modules
-from ridengui.ui.about import Ui_AboutDialog
+from qtpy.QtWidgets import QDialog
+from qtpy.uic import loadUi
 
 
 class AboutDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.ui = Ui_AboutDialog()
-        self.ui.setupUi(self)
+        self.ui = loadUi(dirname(__file__) + "/about.ui", self)

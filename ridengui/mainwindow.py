@@ -1,24 +1,17 @@
 # Built-in modules
 import logging
-import sys
+from os.path import dirname
 
 # Third-party modules
-if "PySide2" in sys.modules:
-    from PySide2.QtCore import QSettings
-    from PySide2.QtGui import QFontDatabase
-    from PySide2.QtWidgets import QApplication, QMainWindow
-elif "PySide6" in sys.modules:
-    from PySide6.QtCore import QSettings
-    from PySide6.QtGui import QFontDatabase
-    from PySide6.QtWidgets import QApplication, QMainWindow
-else:
-    raise ModuleNotFoundError("PySide2 or PySide6 is required to run this program.")
+from qtpy.QtCore import QSettings
+from qtpy.QtGui import QFontDatabase
+from qtpy.QtWidgets import QApplication, QMainWindow
+from qtpy.uic import loadUi
 from riden import Riden
 
 # Local modules
 from ridengui.about import AboutDialog
 from ridengui.settings import SettingsWizard
-from ridengui.ui.mainwindow import Ui_MainWindow
 from ridengui.worker import Worker
 
 
@@ -31,8 +24,7 @@ class MainWindow(QMainWindow):
         #
 
         logging.debug("Initializing MainWindow from mainwindow.ui")
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+        self.ui = loadUi(dirname(__file__) + "/mainwindow.ui", self)
 
         logging.debug("Configuring fixed font for labels")
         font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
@@ -172,16 +164,16 @@ class MainWindow(QMainWindow):
         self.ui.actionAboutQt.triggered.connect(lambda: QApplication.aboutQt())
 
         logging.debug("Connecting voltage/current min/max DoubleSpinBoxes to Dials")
-        self.ui.voltageMinDoubleSpin.valueChanged.connect(self.ui.voltageDial.setMinimum)
-        self.ui.voltageMaxDoubleSpin.valueChanged.connect(self.ui.voltageDial.setMaximum)
-        self.ui.currentMinDoubleSpin.valueChanged.connect(self.ui.currentDial.setMinimum)
-        self.ui.currentMaxDoubleSpin.valueChanged.connect(self.ui.currentDial.setMaximum)
+        self.ui.voltageMinDoubleSpin.valueChanged.connect(lambda v: self.ui.voltageDial.setMinimum(int(v)))
+        self.ui.voltageMaxDoubleSpin.valueChanged.connect(lambda v: self.ui.voltageDial.setMaximum(int(v)))
+        self.ui.currentMinDoubleSpin.valueChanged.connect(lambda v: self.ui.currentDial.setMinimum(int(v)))
+        self.ui.currentMaxDoubleSpin.valueChanged.connect(lambda v: self.ui.currentDial.setMaximum(int(v)))
 
         logging.debug("Connecting voltage/current min/max to DoubleSpinBoxes")
-        self.ui.voltageMinDoubleSpin.valueChanged.connect(self.ui.voltageDoubleSpin.setMinimum)
-        self.ui.voltageMaxDoubleSpin.valueChanged.connect(self.ui.voltageDoubleSpin.setMaximum)
-        self.ui.currentMinDoubleSpin.valueChanged.connect(self.ui.currentDoubleSpin.setMinimum)
-        self.ui.currentMaxDoubleSpin.valueChanged.connect(self.ui.currentDoubleSpin.setMaximum)
+        self.ui.voltageMinDoubleSpin.valueChanged.connect(lambda v: self.ui.voltageDoubleSpin.setMinimum(int(v)))
+        self.ui.voltageMaxDoubleSpin.valueChanged.connect(lambda v: self.ui.voltageDoubleSpin.setMaximum(int(v)))
+        self.ui.currentMinDoubleSpin.valueChanged.connect(lambda v: self.ui.currentDoubleSpin.setMinimum(int(v)))
+        self.ui.currentMaxDoubleSpin.valueChanged.connect(lambda v: self.ui.currentDoubleSpin.setMaximum(int(v)))
 
         logging.debug("Loading voltage/current min/max values from settings")
         self.ui.voltageMinDoubleSpin.setValue(int(self.settings.value("limits/voltage-min", 0)) / 1000)
@@ -190,16 +182,16 @@ class MainWindow(QMainWindow):
         self.ui.currentMaxDoubleSpin.setValue(int(self.settings.value("limits/current-max", self.default_current_max * 1000)) / 1000)
 
         logging.debug("Connecting voltage/current DoubleSpinBoxes to Dials")
-        self.ui.voltageDoubleSpin.valueChanged.connect(self.ui.voltageDial.setValue)
-        self.ui.currentDoubleSpin.valueChanged.connect(self.ui.currentDial.setValue)
+        self.ui.voltageDoubleSpin.valueChanged.connect(lambda v: self.ui.voltageDial.setValue(int(v)))
+        self.ui.currentDoubleSpin.valueChanged.connect(lambda v: self.ui.currentDial.setValue(int(v)))
 
         logging.debug("Connecting voltage/current Dials to DoubleSpinBoxes")
-        self.ui.voltageDial.valueChanged.connect(self.ui.voltageDoubleSpin.setValue)
-        self.ui.currentDial.valueChanged.connect(self.ui.currentDoubleSpin.setValue)
+        self.ui.voltageDial.valueChanged.connect(lambda v: self.ui.voltageDoubleSpin.setValue(int(v)))
+        self.ui.currentDial.valueChanged.connect(lambda v: self.ui.currentDoubleSpin.setValue(int(v)))
 
         logging.debug("Loading voltage/current values from riden")
-        self.ui.voltageDoubleSpin.setValue(self.r.v_set)
-        self.ui.currentDoubleSpin.setValue(self.r.i_set)
+        self.ui.voltageDoubleSpin.setValue(int(self.r.v_set))
+        self.ui.currentDoubleSpin.setValue(int(self.r.i_set))
 
         logging.debug("Connecting voltage/current min/max DoubleSpinBoxes to settings")
         self.ui.voltageMinDoubleSpin.valueChanged.connect(lambda v: self.settings.setValue("limits/voltage-min", v * 1000))
@@ -268,7 +260,7 @@ class MainWindow(QMainWindow):
 
             if self.r.v_set != self.prev_v_set:
                 self.ui.voltagePush.setEnabled(False)
-                self.ui.voltageDoubleSpin.setValue(self.r.v_set)
+                self.ui.voltageDoubleSpin.setValue(int(self.r.v_set))
                 self.prev_v_set = self.r.v_set
 
             if self.ui.currentDoubleSpin.value() != self.prev_i_set:
@@ -276,5 +268,5 @@ class MainWindow(QMainWindow):
 
             if self.r.i_set != self.prev_i_set:
                 self.ui.currentPush.setEnabled(False)
-                self.ui.currentDoubleSpin.setValue(self.r.i_set)
+                self.ui.currentDoubleSpin.setValue(int(self.r.i_set))
                 self.prev_i_set = self.r.i_set

@@ -5,14 +5,8 @@ import signal
 import sys
 
 # Third-party modules
-try:
-    from PySide2.QtWidgets import QApplication
-except ModuleNotFoundError:
-    try:
-        from PySide6.QtWidgets import QApplication
-    except ModuleNotFoundError:
-        raise ModuleNotFoundError("PySide2 or PySide6 is required to run this program.")
 import click
+from qtpy.QtWidgets import QApplication
 
 # Local modules
 from ridengui.mainwindow import MainWindow
